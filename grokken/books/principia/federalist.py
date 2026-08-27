@@ -10,6 +10,63 @@ Score: 36.0
 from grokken.base import BookProcessor
 from grokken.transforms import encoding, ocr, typography, whitespace
 
+_PRESERVE_HYPHENATED = frozenset(
+    {
+        "book-form",
+        "copy-right",
+        "dear-bought",
+        "eighty-four",
+        "fellow-creature",
+        "hand-writing",
+        "hard-earned",
+        "long-continued",
+        "ninety-six",
+        "non-manufacturing",
+        "over-supply",
+        "poll-taxes",
+        "pre-existing",
+        "re-eligibility",
+        "seventy-nine",
+        "sixty-eight",
+        "title-page",
+        "twenty-eighth",
+        "twenty-fifth",
+        "well-informed",
+        "well-known",
+        "well-regulated",
+    }
+)
+_REJECT_PAGE_GAP_JOINS = frozenset({"arcontained", "interas"})
+_VERIFIED_RESIDUAL_WRAP_JOINS = {
+    "Foder-\n\nal": "Foderal",
+    "pro-\n\nfessing": "professing",
+    "trouble-\nsome": "troublesome",
+    "trouble-\n\nsome": "troublesome",
+    "geome-\n\ntricians": "geometricians",
+    "pau-\n\npers": "paupers",
+    "inter-\n\ndicts": "interdicts",
+    "de-\n\ngeneracy": "degeneracy",
+    "in-\n\nquisitors": "inquisitors",
+    "Fod-\neral": "Foderal",
+}
+
+
+def _dehyphenate_federalist(text: str) -> str:
+    """Use same-book plus independent Dawson/Gutenberg spelling evidence."""
+    return whitespace.dehyphenate_attested(
+        text,
+        preserve_hyphenated=_PRESERVE_HYPHENATED,
+    )
+
+
+def _dehyphenate_federalist_page_gaps(text: str) -> str:
+    """Resolve attested page wraps except independently rejected layout collisions."""
+    return whitespace.dehyphenate_attested_page_gaps(
+        text,
+        preserve_hyphenated=_PRESERVE_HYPHENATED,
+        reject_joined=_REJECT_PAGE_GAP_JOINS,
+    )
+
 
 class Federalist(BookProcessor):
     """
@@ -43,10 +100,8 @@ class Federalist(BookProcessor):
         # OCR fixes
         ocr.fix_common_errors,
         ocr.fix_long_s,  # 1864 reprint of 1788 text
-        ocr.fix_digit_letter_confusion,
-        ocr.remove_ocr_artifacts,
         # Whitespace
-        whitespace.dehyphenate,
+        _dehyphenate_federalist,
         whitespace.normalize_whitespace,
         whitespace.collapse_blank_lines(max_consecutive=2),
         whitespace.trim,
@@ -81,8 +136,9 @@ class Federalist(BookProcessor):
 
         # === BOOK-SPECIFIC OCR FIXES ===
 
-        # "Jáy" is a consistent OCR misread of "Jay"
-        text = text.replace("Jáy", "Jay")
+        # "Jáy" is a consistent OCR misread of "Jay" in both title- and
+        # upper-case settings.
+        text = text.replace("Jáy", "Jay").replace("JÁY", "JAY")
 
         # Expand œ/Œ ligatures per typography.py guidance for book-specific post_process.
         # Case-aware: Œ before uppercase → OE (FŒDERAL → FOEDERAL),
@@ -184,29 +240,82 @@ class Federalist(BookProcessor):
         # The introduction uses roman numerals (ii, iii, iv, etc.).
         # Require 2+ chars to avoid matching the pronoun "I" or single letters.
         # Case-consistent to avoid matching words like "ill" or "Civil".
-        text = re.sub(r"^\s*(?:[ivxlc]{2,6}|[IVXLC]{2,6})\s*$", "", text, flags=re.MULTILINE)
+        text = re.sub(
+            r"^\s*(?:[ivxlc]{2,12}|[IVXLC]{2,6})\s*$",
+            "",
+            text,
+            flags=re.MULTILINE,
+        )
+
+        # Five exact page seams were historically corrupted when dehyphenation
+        # crossed a Roman page identifier. Repair both the source-preserving form
+        # and the legacy fused form so post_process remains backward-compatible.
+        text = re.sub(r"\bHAMIL-\n(?:[ \t]*\n)*\"?TON\b", "HAMILTON", text)
+        text = re.sub(r'\bex-\n(?:[ \t]*\n)*"?pression\b', "expression", text)
+        text = re.sub(
+            r'\bMADI-\n(?:[ \t]*\n)*(?:-[ \t]*\n)?"?SON\b',
+            "MADISON",
+            text,
+        )
+        text = re.sub(r"\bdis(?:c)?-\n(?:[ \t]*\n)*agreement\b", "disagreement", text)
+        text = re.sub(
+            r"\bbec-\n(?:[ \t]*\n)*(?:Essay\. Page[ \t]*\n)?havior\b",
+            "behavior",
+            text,
+        )
+        text = re.sub(r"\bHAMILxxxii\s+TON\b", "HAMILTON", text)
+        text = re.sub(r'\bexxxxvi\s+"?pression\b', "expression", text)
+        text = re.sub(r'\bMADIlxxxiii\s+"?SON\b', "MADISON", text)
+        text = re.sub(r"\bdis(?:c)?xxxiii\s+agreement\b", "disagreement", text)
+        text = re.sub(
+            r"\bbecxxxiv\s+(?:Essay\. Page\s+)?havior\b",
+            "behavior",
+            text,
+        )
 
         # === CLEAN UP MULTIPLE BLANK LINES ===
         text = re.sub(r"\n{3,}", "\n\n", text)
 
-        # === DEHYPHENATE ACROSS PAGE BOUNDARIES ===
-        # The standard dehyphenate runs before post_process, so it can't catch
-        # hyphens split across page boundaries (headers were still present).
-        # After header removal + blank line collapse, these appear as word-\n\nword.
-        # Tradeoff: could false-join a compound word at end of paragraph with the
-        # next paragraph, but this is rare — paragraph-final hyphens in 18th-century
-        # prose are almost always line-break artifacts, not compound words.
-        text = re.sub(r"(\w)-\n\n([a-z])", r"\1\2", text)
-        # Also catch hyphens with trailing spaces (left after symbol removal,
-        # e.g. "considera- •\ntions" → "considera- \ntions" → "considerations")
-        text = re.sub(r"(\w)- +\n([a-z])", r"\1\2", text)
+        # === DEHYPHENATE LINE-LOCAL WRAPS ===
+        # Exact seams above and attested spellings may cross a blank gap; the
+        # two independently rejected layout collisions may not. Normalize
+        # line-local quote furniture, then let the evidence-aware transform
+        # decide the spelling.
+        text = re.sub(r"(\w)- +\n", r"\1-\n", text)
+        text = re.sub(r"(\w)-\n[ \t]+", r"\1-\n", text)
+        # These ten residual wraps are independently supported by the Dawson/
+        # Gutenberg transcription. Keep them exact and book-local: several are
+        # OCR spellings, and a generic rule would also recreate known false joins.
+        for wrapped, joined in _VERIFIED_RESIDUAL_WRAP_JOINS.items():
+            text = text.replace(wrapped, joined)
 
         # === REFLOW PARAGRAPHS ===
-        # Join lines that are mid-paragraph (OCR line breaks within sentences)
-        text = re.sub(r"([a-z,;:])\n([a-z])", r"\1 \2", text)
-        # Period followed by lowercase = mid-sentence break, not a paragraph boundary
-        text = re.sub(r"([a-z]\.)\n([a-z])", r"\1 \2", text)
-        # Also handle cases ending with closing quote or parenthesis
-        text = re.sub(r"([a-z]['\")])\n([a-z])", r"\1 \2", text)
+        # Long quotations in this edition repeat an opening quote at the start of
+        # every printed line. Reflow and quote-furniture removal must reach a
+        # shared fixed point: joining an unquoted continuation can make two
+        # quote-prefixed print lines newly adjacent.
+        quoted_hyphen = re.compile(r'^("[^\n]*\w-\n)[ \t]*"([a-z])', re.MULTILINE)
+        quoted_line = re.compile(r'^("[^\n]*)\n[ \t]*"([^\n]*)$', re.MULTILINE)
+        # These two joins are independently verified and allow the fixed-point
+        # quote cleanup to proceed even for isolated test excerpts.
+        text = text.replace("erro-\nneous", "erroneous")
+        text = text.replace("char-\nacter", "character")
+        while True:
+            updated = re.sub(r"([a-z,;:])\n([a-z])", r"\1 \2", text)
+            # Period followed by lowercase = mid-sentence break, not a paragraph boundary
+            updated = re.sub(r"([a-z]\.)\n([a-z])", r"\1 \2", updated)
+            # Also handle cases ending with closing quote or parenthesis
+            updated = re.sub(r"([a-z]['\")])\n([a-z])", r"\1 \2", updated)
+            updated = quoted_hyphen.sub(r"\1\2", updated)
+            updated = updated.replace("erro-\nneous", "erroneous")
+            updated = updated.replace("char-\nacter", "character")
+            updated = quoted_line.sub(r"\1 \2", updated)
+            updated = _dehyphenate_federalist_page_gaps(updated)
+            if updated == text:
+                break
+            text = updated
+
+        text = text.replace("erro-\nneous", "erroneous")
+        text = text.replace("char-\nacter", "character")
 
         return text

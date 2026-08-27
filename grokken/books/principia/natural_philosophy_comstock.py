@@ -39,9 +39,7 @@ class NaturalPhilosophy(BookProcessor):
         typography.normalize_spaces,
         ocr.fix_common_errors,
         ocr.fix_long_s,  # Important for 1835 text
-        ocr.fix_digit_letter_confusion,
-        ocr.remove_ocr_artifacts,
-        whitespace.dehyphenate,
+        whitespace.dehyphenate_attested,
         whitespace.normalize_whitespace,
         whitespace.collapse_blank_lines(max_consecutive=2),
         whitespace.trim,
@@ -51,7 +49,67 @@ class NaturalPhilosophy(BookProcessor):
         """Book-specific cleanup for A System of Natural Philosophy."""
         import regex as re
 
-        # Remove standalone page numbers
-        text = re.sub(r"^\s*\d{1,4}\s*$", "", text, flags=re.MULTILINE)
+        # Exact numbered running heads. Figure labels, formulas, and unnumbered
+        # section headings are deliberately outside this rule.
+        running_headers = (
+            "ASTRONOMY.",
+            "ASTRONOMY,",
+            "MIRRORS.",
+            "PROPERTIES OF BODIES.",
+            "ELECTRICITY.",
+            "VISION.",
+            "GRAVITY.",
+            "HYDROSTATICS.",
+            "EARTH.",
+            "TIME.",
+            "LEVER.",
+            "WHEEL AND AXLE.",
+            "HYDRAULICS.",
+            "ACOUSTICS.",
+            "OPTICS.",
+            "MOON.",
+            "BAROMETER.",
+            "LENSES.",
+            "TELESCOPE.",
+            "CENTRE OF GRAVITY.",
+            "SCREW.",
+            "RAINBOW.",
+            "SEASONS.",
+            "ECLIPSES.",
+            "CURVILINEAR MOTION.",
+            "PENDULUM.",
+            "PULLEY.",
+            "LATITUDE AND LONGITUDE.",
+            "MAGNETISM.",
+            "RESULTANT MOTION.",
+            "MECHANICS.",
+            "PNEUMATICS.",
+            "PUMP.",
+            "FIGURE OF THE EARTH.",
+            "PRECESSION OF EQUINOXES.",
+            "TIDES.",
+            "COLORS.",
+        )
+        header = "|".join(re.escape(value) for value in running_headers)
+        text = re.sub(
+            rf"(?m)^(?:"
+            rf"[ \t]*\d{{1,4}}[ \t]*\n(?:[ \t]*\n)?[ \t]*(?:{header})[ \t]*"
+            rf"|[ \t]*(?:{header})[ \t]*\n(?:[ \t]*\n)?[ \t]*\d{{1,4}}[ \t]*"
+            rf")$",
+            "",
+            text,
+        )
 
-        return text
+        # Confirmed local crop/segmentation errors. These are exact phrases so
+        # diagram labels, formulas, and historical spelling remain untouched.
+        text = text.replace("in Washing\nton College", "in Washington College")
+        text = text.replace("along. Bu\non making", "along. But\non making")
+        text = text.replace("The re\naction of the atmosphere", "The reaction of the atmosphere")
+        text = text.replace("the bel\nlows", "the bellows")
+        text = text.replace("moved at alt, for", "moved at all, for")
+        text = text.replace("15lbs..", "15 lbs.")
+        text = text.replace("sec_Chemistry", "see Chemistry")
+        text = text.replace("antartic circle", "antarctic circle")
+        text = text.replace("non-conduct\nors", "non-conductors")
+
+        return re.sub(r"\n{3,}", "\n\n", text).strip()

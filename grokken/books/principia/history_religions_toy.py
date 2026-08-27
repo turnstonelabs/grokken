@@ -7,8 +7,54 @@ the History of Religions series edited by Morris Jastrow Jr.
 Score: 38.8
 """
 
+import regex as re
+
 from grokken.base import BookProcessor
 from grokken.transforms import encoding, ocr, typography, whitespace
+
+_RUNNING_HEADERS = frozenset(
+    {
+        "NATURE OF RELIGION",
+        "THE SOUL",
+        "EARLY RELIGIOUS CEREMONIES",
+        "EARLY CULTS",
+        "TOTEMISM AND TABOO",
+        "GODS",
+        "MYTHS",
+        "MAGIC AND DIVINATION",
+        "SOCIAL DEVELOPMENT OF RELIGION",
+        "THE HIGHER THEISTIC DEVELOPMENT",
+        "SCIENTIFIC AND ETHICAL ELEMENTS",
+        "INDEX",
+    }
+)
+
+_SCAN_GARBAGE_LINES = frozenset({"عيرة", "ив", "пол", "да", "ვ", "།", "་", "९", "१९", "९९"})
+
+
+def _remove_page_furniture(text: str) -> str:
+    lines = text.splitlines()
+    clear: set[int] = {
+        index for index, line in enumerate(lines) if line.strip() in _SCAN_GARBAGE_LINES
+    }
+    for index, line in enumerate(lines):
+        if not re.fullmatch(r"[ \t]*\d{1,4}[ \t]*", line):
+            continue
+        found_header = False
+        for step in (-1, 1):
+            cursor = index + step
+            while 0 <= cursor < len(lines):
+                if not lines[cursor].strip():
+                    cursor += step
+                    continue
+                if lines[cursor].strip() not in _RUNNING_HEADERS:
+                    break
+                clear.add(cursor)
+                found_header = True
+                cursor += step
+        if found_header:
+            clear.add(index)
+    return "\n".join(line for index, line in enumerate(lines) if index not in clear)
 
 
 class HistoryOfReligions(BookProcessor):
@@ -40,9 +86,7 @@ class HistoryOfReligions(BookProcessor):
         typography.normalize_dashes,
         typography.normalize_spaces,
         ocr.fix_common_errors,
-        ocr.fix_digit_letter_confusion,
-        ocr.remove_ocr_artifacts,
-        whitespace.dehyphenate,
+        whitespace.dehyphenate_attested,
         whitespace.normalize_whitespace,
         whitespace.collapse_blank_lines(max_consecutive=2),
         whitespace.trim,
@@ -50,8 +94,6 @@ class HistoryOfReligions(BookProcessor):
 
     def post_process(self, text: str) -> str:
         """Book-specific cleanup for Introduction to History of Religions."""
-        import regex as re
-
         # Remove running headers with page numbers
         text = re.sub(
             r"^\s*\d+\s+INTRODUCTION TO HISTORY OF RELIGIONS\s*$",
@@ -66,7 +108,15 @@ class HistoryOfReligions(BookProcessor):
             flags=re.MULTILINE,
         )
 
-        # Remove standalone page numbers
-        text = re.sub(r"^\s*\d{1,4}\s*$", "", text, flags=re.MULTILINE)
+        text = _remove_page_furniture(text)
 
-        return text
+        # Two page-break splits remain only because folios intervened.
+        text = text.replace("Aphro-\n\nditon", "Aphroditon")
+        text = text.replace("vic-\n\nof Judas", "victory of Judas")
+
+        # The index is followed by a pasted library due slip.
+        due_slip = text.find("\nDATE DUE")
+        if due_slip >= 0:
+            text = text[:due_slip]
+
+        return whitespace.collapse_blank_lines(max_consecutive=2)(text).strip()
