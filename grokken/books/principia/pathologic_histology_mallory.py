@@ -89,6 +89,33 @@ _CONFIRMED_LINE_WRAP_REPAIRS = (
     ("sim-\nplifies", "simplifies"),
     ("de-\nmand", "demand"),
     ("favor-\ning", "favoring"),
+    ("trans-\n\nplanted", "transplanted"),
+)
+_CONFIRMED_CAPTION_SEAM_REPAIRS = (
+    (
+        "Regenerative proliferation of fibroblasts is fairly active. Exu-\n\n"
+        "Fig. 132. Syphilis. Primary lesion. Two mitoses in wall of blood-vessel. M.\n"
+        "dation and regeneration",
+        "Regenerative proliferation of fibroblasts is fairly active.\n\n"
+        "Fig. 132. Syphilis. Primary lesion. Two mitoses in wall of blood-vessel. M.\n\n"
+        "Exudation and regeneration",
+    ),
+    (
+        "days it curls up in its characteristic spiral attitude, becomes ap-\n\n"
+        "Fig. 162.-Trichiniasis. Part of a muscle-fiber showing portions necrotic and\n"
+        "other portions beginning to regenerate.\n"
+        "parently innocuous, and may persist in this condition for years\n"
+        "(twenty or more) until death of its host and ingestion of the infected muscle by "
+        "another host sets it free to continue the cycle of\n"
+        "development.",
+        "days it curls up in its characteristic spiral attitude, becomes apparently "
+        "innocuous, and may persist in this condition for years\n"
+        "(twenty or more) until death of its host and ingestion of the infected muscle by "
+        "another host sets it free to continue the cycle of\n"
+        "development.\n\n"
+        "Fig. 162.-Trichiniasis. Part of a muscle-fiber showing portions necrotic and\n"
+        "other portions beginning to regenerate.",
+    ),
 )
 
 
@@ -183,9 +210,14 @@ class PathologicHistology(BookProcessor):
         for broken, repaired in _CONFIRMED_LINE_WRAP_REPAIRS:
             text = text.replace(broken, repaired)
 
+        for broken, repaired in _CONFIRMED_CAPTION_SEAM_REPAIRS:
+            text = text.replace(broken, repaired)
+
         # Clear OCR defects from the blind sample.
         text = text.replace("nature goes ahout it", "nature goes about it")
         text = text.replace("Somtimes the organisms", "Sometimes the organisms")
+        text = text.replace("cannot be told.\napart", "cannot be told\napart")
+        text = text.replace("thin non-vascular, walls", "thin non-vascular walls")
         text = text.replace(
             "In typhoid fever focal lesions like those in the liver and com-\n39\n\n"
             "posed of phagocytic endothelial leukocytes",

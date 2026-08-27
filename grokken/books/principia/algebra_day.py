@@ -45,6 +45,21 @@ _RUNNING_HEADERS = frozenset(
 )
 _FOLIO_RANGE = range(1, 333)
 _MIN_FOLIO_SEQUENCE = 20
+_CONFIRMED_LINE_WRAP_REPAIRS = (
+    ("equili-\nbrium", "equilibrium"),
+    ("VUL-\nGAR", "VULGAR"),
+    ("BE-\nTWEEN", "BETWEEN"),
+    ("QUO-\nTIENT", "QUOTIENT"),
+    ("TO-\nGETHER", "TOGETHER"),
+    ("DE-\nCREASE", "DECREASE"),
+    ("abscis-.\nsas", "abscissas"),
+    # This edition consistently spells the mathematical term with a
+    # lexical hyphen. Only the physical line break is removed here.
+    ("co-ordi\nnates", "co-ordinates"),
+)
+_CONFIRMED_PROSE_OCR_REPAIRS = (
+    ("it may have two\nor more rools, (Art. 498.)", "it may have two\nor more roots, (Art. 498.)"),
+)
 
 
 def _remove_page_furniture(text: str) -> str:
@@ -140,5 +155,9 @@ class AlgebraDay(BookProcessor):
         # This was the sole remaining word split across a page boundary after
         # the page furniture had been removed.
         text = text.replace("suc-\n\nceeding", "succeeding")
+        for broken, repaired in _CONFIRMED_LINE_WRAP_REPAIRS:
+            text = text.replace(broken, repaired)
+        for broken, repaired in _CONFIRMED_PROSE_OCR_REPAIRS:
+            text = text.replace(broken, repaired)
 
         return whitespace.collapse_blank_lines(max_consecutive=2)(text).strip()

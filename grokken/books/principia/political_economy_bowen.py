@@ -70,6 +70,12 @@ _PAGE_BREAK_WORD_JOINS = (
     ("con", "nected"),
     ("conse", "quently"),
 )
+_CONFIRMED_UNHYPHENATED_WRAP_REPAIRS = (
+    ("consid\nered", "considered"),
+    ("pre-\nferments", "preferments"),
+    ("unim-\npeded", "unimpeded"),
+)
+_CONFIRMED_PROSE_OCR_REPAIRS = (("СНАРТЕR IX.", "CHAPTER IX."),)
 
 
 def _normalized_line(line: str) -> str:
@@ -220,4 +226,8 @@ class PoliticalEconomyBowen(BookProcessor):
         text = _remove_recurrent_page_headers(text)
         text = _remove_exact_running_head_blocks(text)
         text = _join_confirmed_page_break_words(text)
+        for broken, repaired in _CONFIRMED_UNHYPHENATED_WRAP_REPAIRS:
+            text = text.replace(broken, repaired)
+        for broken, repaired in _CONFIRMED_PROSE_OCR_REPAIRS:
+            text = text.replace(broken, repaired)
         return re.sub(r"\n{3,}", "\n\n", text)

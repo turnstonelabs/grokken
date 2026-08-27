@@ -154,6 +154,49 @@ def test_channing_preserves_verified_anti_slavery_hyphenation():
     assert "anti-slavery societies" in result
 
 
+def test_algebra_repairs_only_confirmed_residual_word_wraps():
+    source = (
+        "equili-\nbrium\nVUL-\nGAR\nBE-\nTWEEN\nQUO-\nTIENT\nTO-\nGETHER\n"
+        "DE-\nCREASE\nabscis-.\nsas\n"
+        "co-ordi\nnates\nco-ordinate"
+    )
+
+    result = AlgebraDay().process(source)
+
+    assert result == (
+        "equilibrium\nVULGAR\nBETWEEN\nQUOTIENT\nTOGETHER\nDECREASE\nabscissas\n"
+        "co-ordinates\nco-ordinate"
+    )
+
+
+def test_channing_repairs_confirmed_wraps_and_contextual_prose_bar():
+    source = (
+        "intellectual suns, the stars of self-\nnamed Orthodoxy\n"
+        "the management almost exclusively de-\nvolves.\n"
+        "Lord's-\nday\nmin-\nistries\nself-\nimmolating\nap-\nproximates\n"
+        "which are often adduced in proof\n|\nof Christ's supreme divinity\n"
+        "word of warning, of censure, af alarm\n"
+        "A table separator | remains inline."
+    )
+
+    result = ChanningWorks().process(source)
+
+    assert "stars of self-named Orthodoxy" in result
+    assert "exclusively devolves" in result
+    assert "Lord's-day\nministries\nself-immolating\napproximates" in result
+    assert "adduced in proof\nof Christ's" in result
+    assert "word of warning, of censure, of alarm" in result
+    assert "A table separator | remains inline." in result
+
+
+def test_algebra_repairs_context_verified_prose_ocr_without_touching_formula_text():
+    source = "it may have two\nor more rools, (Art. 498.)\nFormula label rools"
+
+    result = AlgebraDay().process(source)
+
+    assert result == "it may have two\nor more roots, (Art. 498.)\nFormula label rools"
+
+
 @pytest.mark.parametrize(
     ("processor", "source", "kept", "removed"),
     (

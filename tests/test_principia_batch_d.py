@@ -185,6 +185,26 @@ def test_spencer_local_hyphen_evidence_overrides_global_frequency() -> None:
     assert "significantly called inter-nuncial). It is fulfilled" in result
 
 
+def test_bowen_repairs_confirmed_unhyphenated_word_wrap() -> None:
+    source = (
+        "came to be consid\nered as farms\n"
+        "level your pre-\nferments\n"
+        "operating unim-\npeded\n"
+        "СНАРТЕR IX.\n"
+        "consider this separate line"
+    )
+
+    result = PoliticalEconomyBowen().process(source)
+
+    assert result == (
+        "came to be considered as farms\n"
+        "level your preferments\n"
+        "operating unimpeded\n"
+        "CHAPTER IX.\n"
+        "consider this separate line"
+    )
+
+
 def test_stowe_removes_only_context_verified_scan_marks() -> None:
     text = (
         "first sentence\n✓\ncontinues\nsecond sentence\n」\ncontinues\n"

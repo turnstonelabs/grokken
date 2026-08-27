@@ -523,6 +523,72 @@ def test_mallory_repositions_caption_out_of_split_word() -> None:
     )
 
 
+def test_mallory_repositions_confirmed_fig_132_caption_without_losing_it() -> None:
+    source = (
+        "Regenerative proliferation of fibroblasts is fairly active. Exu-\n\n"
+        "Fig. 132. Syphilis. Primary lesion. Two mitoses in wall of blood-vessel. M.\n"
+        "dation and regeneration take place in the corium."
+    )
+
+    result = PathologicHistology().process(source)
+
+    assert result == (
+        "Regenerative proliferation of fibroblasts is fairly active.\n\n"
+        "Fig. 132. Syphilis. Primary lesion. Two mitoses in wall of blood-vessel. M.\n\n"
+        "Exudation and regeneration take place in the corium."
+    )
+
+
+def test_mallory_repositions_confirmed_fig_162_caption_after_contiguous_prose() -> None:
+    source = (
+        "days it curls up in its characteristic spiral attitude, becomes ap-\n\n"
+        "Fig. 162.-Trichiniasis. Part of a muscle-fiber showing portions necrotic and\n"
+        "other portions beginning to regenerate.\n"
+        "parently innocuous, and may persist in this condition for years\n"
+        "(twenty or more) until death of its host and ingestion of the infected muscle by "
+        "another host sets it free to continue the cycle of\n"
+        "development."
+    )
+
+    result = PathologicHistology().process(source)
+
+    assert result == (
+        "days it curls up in its characteristic spiral attitude, becomes apparently "
+        "innocuous, and may persist in this condition for years\n"
+        "(twenty or more) until death of its host and ingestion of the infected muscle by "
+        "another host sets it free to continue the cycle of\n"
+        "development.\n\n"
+        "Fig. 162.-Trichiniasis. Part of a muscle-fiber showing portions necrotic and\n"
+        "other portions beginning to regenerate."
+    )
+
+
+def test_mallory_repairs_only_contextual_spurious_period() -> None:
+    source = "the lesions cannot be told.\napart and the bacilli\nA complete sentence.\nApart"
+
+    result = PathologicHistology().process(source)
+
+    assert result == (
+        "the lesions cannot be told\napart and the bacilli\nA complete sentence.\nApart"
+    )
+
+
+def test_mallory_repairs_refreshed_sample_without_broad_punctuation_changes() -> None:
+    source = (
+        "the cells of the trans-\n\nplanted bone always die\n"
+        "separated by thin non-vascular, walls\n"
+        "A different, grammatical comma remains."
+    )
+
+    result = PathologicHistology().process(source)
+
+    assert result == (
+        "the cells of the transplanted bone always die\n"
+        "separated by thin non-vascular walls\n"
+        "A different, grammatical comma remains."
+    )
+
+
 @pytest.mark.parametrize(
     "broken",
     [

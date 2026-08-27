@@ -97,6 +97,15 @@ _RUNNING_HEADERS = frozenset(
 _FOLIO_RANGE = range(1, 932)
 _MIN_FOLIO_SEQUENCE = 20
 _PRESERVE_HYPHENATED = ("anti-slavery",)
+_CONFIRMED_LINE_WRAP_REPAIRS = (
+    ("self-\nnamed", "self-named"),
+    ("de-\nvolves", "devolves"),
+    ("Lord's-\nday", "Lord's-day"),
+    ("min-\nistries", "ministries"),
+    ("self-\nimmolating", "self-immolating"),
+    ("ap-\nproximates", "approximates"),
+)
+_ISOLATED_PROSE_BAR_CONTEXT = "which are often adduced in proof\n|\nof Christ's supreme divinity"
 
 
 def _dehyphenate_channing(text: str) -> str:
@@ -199,4 +208,13 @@ class ChanningWorks(BookProcessor):
 
         text = _remove_page_furniture(text)
         text = text.replace("insti-\n\ntution", "institution")
+        for broken, repaired in _CONFIRMED_LINE_WRAP_REPAIRS:
+            text = text.replace(broken, repaired)
+        text = text.replace(
+            _ISOLATED_PROSE_BAR_CONTEXT,
+            "which are often adduced in proof\nof Christ's supreme divinity",
+        )
+        text = text.replace(
+            "word of warning, of censure, af alarm", "word of warning, of censure, of alarm"
+        )
         return whitespace.collapse_blank_lines(max_consecutive=2)(text).strip()
