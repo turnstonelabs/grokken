@@ -12,16 +12,21 @@ from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
 
 SCHEMA_VERSION = "principia-34-qualification-v1"
-QUALIFICATION_ID = "principia-34-r8-20260826"
-EXPECTED_CANDIDATE_SHA256 = "07f9c9a2b29b155077bc8e294fc9ed558c2a3457ce0c08f915174150928e3a87"
-EXPECTED_CANDIDATE_SIZE = 23_111_880
-EXPECTED_AUDIT_SHA256 = "4343034d4c2f20b616ab5d3148d4a338a2c0318f55fb00802b1418431c4bd928"
+QUALIFICATION_ID = "principia-34-r10-20260826"
+EXPECTED_CANDIDATE_SHA256 = "9c9fb8bdacc4438ce86103c4a6ac202fca23bd787c2cf990d0cf2e69845e8934"
+EXPECTED_CANDIDATE_SIZE = 23_107_588
+EXPECTED_AUDIT_SHA256 = "21501257be8e25a8c9db18a04155b7228f577c643729b776d0e96a7e7b9a68de"
 EXPECTED_SOURCE_CONFIG_SHA256 = "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab"
 EXPECTED_STATIC_CONFIG_SHA256 = "1473020b606e0a85a13e6c1fdc72427c0e718c71a92ab27d43cf9b1560f9a329"
 EXPECTED_STATIC_PROFILE_SHA256 = "61c58513aba12ddfb439736c4a85b2aba387776afffd7f742a247d48938aaa2a"
 EXPECTED_SAMPLE_SEED_SHA256 = "08d097cd91f23d901097ffb82f8267797d90463c2ca70329ecce4642cbb22ba7"
 EXPECTED_SAMPLE_WINDOWS = 64
 EXPECTED_BOOK_COUNT = 34
+TOKENIZER_SNAPSHOT_NAME = "qwen3.8-27b-native"
+EXPECTED_LEGACY_HOLDOUT_TEXT_SHA256 = {
+    "32044010149714": "2a5589e2e0e5f62f8082474de74c23f9ba7a95032a3d1d911f73c56c52afebb8",
+    "32044072043805": "18202b6c7ef7227f20eda40d3b1bf590abf8ac4f20956c47e0b403ebdf1a1df0",
+}
 
 TOKENIZER_FILE_HASHES = {
     "chat_template.jinja": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
@@ -40,11 +45,11 @@ MANUAL_CATEGORIES = (
 
 # barcode: (batch, tier, total, H, S, O, L)
 _MANUAL_ROWS = {
-    "32044097009690": ("A", "REVIEW", 6, 0, 6, 0, 0),
+    "32044097009690": ("A", "REVIEW", 0, 0, 0, 0, 0),
     "HN2WWN": ("A", "REVIEW", 9, 0, 5, 3, 1),
     "HWT5II": ("A", "REVIEW", 6, 1, 4, 1, 0),
     "HNU1G9": ("A", "REVIEW", 10, 1, 4, 5, 0),
-    "AH3KTH": ("A", "REVIEW", 3, 0, 2, 1, 0),
+    "AH3KTH": ("A", "HOLD", 5, 0, 1, 4, 0),
     "HWKBVP": ("A", "REVIEW", 11, 0, 7, 3, 1),
     "32044038386975": ("A", "HOLD", 15, 6, 5, 3, 1),
     "AH45Q4": ("A", "HOLD", 8, 2, 2, 2, 2),
@@ -62,9 +67,9 @@ _MANUAL_ROWS = {
     "HWQXIB": ("C", "HOLD", 14, 1, 1, 2, 10),
     "32044097047575": ("C", "HOLD", 14, 2, 1, 5, 6),
     "HN6KER": ("C", "GOLD", 0, 0, 0, 0, 0),
-    "HC1BZF": ("C", "REVIEW", 3, 0, 2, 1, 0),
+    "HC1BZF": ("C", "REVIEW", 0, 0, 0, 0, 0),
     "HWK6N4": ("C", "HOLD", 16, 2, 7, 2, 5),
-    "32044018740308": ("D", "REVIEW", 1, 0, 1, 0, 0),
+    "32044018740308": ("D", "REVIEW", 0, 0, 0, 0, 0),
     "HXQ9SJ": ("D", "REVIEW", 4, 1, 2, 1, 0),
     "LI3QQB": ("D", "HOLD", 8, 0, 2, 5, 1),
     "32044097049340": ("D", "HOLD", 9, 0, 5, 0, 4),
@@ -72,22 +77,31 @@ _MANUAL_ROWS = {
     "32044020258091": ("D", "HOLD", 9, 1, 3, 5, 0),
     "32044094451689": ("D", "HOLD", 10, 0, 3, 6, 1),
     "32044018647321": ("D", "HOLD", 16, 1, 5, 1, 9),
-    "32044010149714": ("validation", "REVIEW", 37, 1, 14, 9, 13),
-    "32044072043805": ("validation", "REVIEW", 27, 0, 5, 4, 18),
+    "32044010149714": ("validation", "HOLD", 37, 1, 14, 9, 13),
+    "32044072043805": ("validation", "HOLD", 27, 0, 5, 4, 18),
 }
 
 _MANUAL_REASONS = {
     "32044010149714": (
-        "Correct bounded repairs, with dense residual split, OCR, and layout findings."
+        "Dense residual split, OCR, and layout findings preclude calibration validation."
     ),
     "32044018647321": "Pervasive marginal and column interleaving.",
-    "32044018740308": "One residual word continuation.",
+    "32044018740308": (
+        "Targeted repairs leave zero actionable fixed-seed findings; reserved for bounded "
+        "calibration training."
+    ),
     "32044020258091": "Residual folio, word continuations, and OCR artifacts.",
     "32044038386975": "Recurrent page furniture plus cropped and figure OCR.",
     "32044069804946": "Footnote and reading-order interruptions, word wraps, and OCR artifacts.",
-    "32044072043805": "Verified r8 joins are safe; legacy layout, OCR, and word wraps remain.",
+    "32044072043805": (
+        "Legacy introduction, table, layout, OCR, and word-wrap damage precludes calibration "
+        "validation."
+    ),
     "32044094451689": "Quote and punctuation OCR, missing-text OCR, and word continuations.",
-    "32044097009690": "Residual word continuations; mathematical formulas were preserved.",
+    "32044097009690": (
+        "Targeted repairs leave zero actionable fixed-seed findings while preserving formulas; "
+        "reserved for bounded calibration training."
+    ),
     "32044097047575": "Figures and questions displace prose, with residual OCR and page heads.",
     "32044097049340": "Malformed tables and contents plus reordered body text.",
     "32044103157418": (
@@ -95,9 +109,15 @@ _MANUAL_REASONS = {
     ),
     "32044103157517": "Systematic marginal-heading and two-column interleaving.",
     "AH3HJZ": "OCR debris and truncated fragments indicate unstable text.",
-    "AH3KTH": "Two word continuations and one isolated prose OCR bar.",
+    "AH3KTH": (
+        "Five sampled findings and 235 residual bar-bearing lines, including 51 possible column "
+        "splices; quarantined pending page reconstruction."
+    ),
     "AH45Q4": "Residual page furniture and interleaved prose.",
-    "HC1BZF": "Two caption-to-prose ordering seams and one punctuation OCR error.",
+    "HC1BZF": (
+        "Targeted caption and prose repairs leave zero actionable fixed-seed findings; reserved "
+        "for bounded calibration training."
+    ),
     "HN28C4": "Recurring word continuations and two running heads without broad column damage.",
     "HN2WWN": "Word continuations, localized prose OCR, and figure-layout debris.",
     "HN6KER": (
@@ -120,9 +140,11 @@ _MANUAL_REASONS = {
 }
 
 SPECIAL_ROLES = {
-    "HN6KER": "gold_native_context_anchor",
-    "HC1BZF": "provisional_over_262k_candidate",
-    "AH3KTH": "near_1m_repair_candidate",
+    "HN6KER": "gold_validation_holdout",
+    "32044097009690": "calibration_training_ready",
+    "32044018740308": "calibration_training_ready",
+    "HC1BZF": "calibration_training_ready_over_262k",
+    "AH3KTH": "quarantined_column_reconstruction",
     "HWKBVP": "factor_4_repair_candidate",
     "32044103157418": "duplicate_excluded",
     "32044010149714": "holdout_repair",
@@ -143,9 +165,19 @@ TIER_DEFINITIONS = {
 }
 
 ROLE_DEFINITIONS = {
-    "gold_native_context_anchor": (
-        "Gold preservation anchor inside its observed native-length context; "
-        "not an extension proof."
+    "gold_validation_holdout": (
+        "Gold whole-book validation source excluded from training; valid only inside its "
+        "observed native-length context, not as an extension proof."
+    ),
+    "calibration_training_ready": (
+        "Zero-actionable-window Review source approved only for the bounded initial calibration."
+    ),
+    "calibration_training_ready_over_262k": (
+        "Zero-actionable-window Review source long enough to cover the native-context boundary; "
+        "approved only for the bounded initial calibration."
+    ),
+    "quarantined_column_reconstruction": (
+        "Review source excluded from training pending page and column reconstruction."
     ),
     "provisional_over_262k_candidate": (
         "Provisional source long enough to probe beyond 262,144 tokens after targeted repair."
@@ -360,7 +392,7 @@ def tokenizer_metadata(
         aggregate.update(expected_sha256.encode("ascii"))
         aggregate.update(b"\0")
     return {
-        "snapshot_name": tokenizer_path.name,
+        "snapshot_name": TOKENIZER_SNAPSHOT_NAME,
         "loader": (
             "transformers.AutoTokenizer.from_pretrained("
             "local_files_only=True, trust_remote_code=False)"
@@ -483,6 +515,12 @@ def build_qualification(
         record = candidate[barcode]
         text = str(record["text"])
         text_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        expected_legacy_holdout_sha256 = EXPECTED_LEGACY_HOLDOUT_TEXT_SHA256.get(barcode)
+        if (
+            expected_legacy_holdout_sha256 is not None
+            and text_sha256 != expected_legacy_holdout_sha256
+        ):
+            raise ValueError(f"legacy holdout text SHA256 differs for {barcode}")
         audit_book = audit_books[barcode]
         audit_processed = audit_book["processed"]
         if audit_processed["text_sha256"] != text_sha256:
@@ -528,7 +566,7 @@ def build_qualification(
         raise ValueError("candidate text-set SHA256 differs from audit aggregate")
 
     summary = _aggregate_counts(books)
-    if summary["tier_book_counts"] != {"GOLD": 1, "HOLD": 19, "REVIEW": 14}:
+    if summary["tier_book_counts"] != {"GOLD": 1, "HOLD": 22, "REVIEW": 11}:
         raise ValueError("manual tier totals differ from the frozen qualification")
     gold = next(book for book in books if book["manual_qualification"]["tier"] == "GOLD")
     if gold["barcode"] != "HN6KER" or gold["manual_qualification"]["finding_count"] != 0:
@@ -571,7 +609,7 @@ def build_qualification(
             "barcode": gold["barcode"],
             "qwen_token_count": gold["qwen_token_count"],
             "manual_primary_exclusive_finding_count": 0,
-            "scope": "native_context_preservation_anchor_only",
+            "scope": "native_context_validation_holdout_only",
             "native_context_ceiling_tokens": 262_144,
             "target_context_tokens": 1_000_000,
             "limitation": (
@@ -588,10 +626,17 @@ def build_qualification(
         },
         "training_scope": {
             "currently_gold_token_count": 52_500,
-            "validation_holdout_token_count": 644_361,
+            "gold_validation_holdout_token_count": 52_500,
+            "calibration_training_ready_token_count": 761_948,
+            "calibration_training_ready_barcodes": [
+                "32044018740308",
+                "32044097009690",
+                "HC1BZF",
+            ],
+            "structurally_blocked_legacy_holdout_token_count": 644_361,
+            "quarantined_column_reconstruction_token_count": 986_663,
             "duplicate_excluded_token_count": 395_269,
-            "non_holdout_nonduplicate_token_count": 9_036_289,
-            "non_holdout_nonduplicate_requires_tier_specific_repair": True,
+            "bounded_calibration_only": True,
         },
         "duplicate_group": {
             "group": "davis_elements_of_international_law_1900_1903",
@@ -631,6 +676,14 @@ def build_qualification(
                 "stage": "r8_final_qualification",
                 "decision": (
                     "Gold status uses preservation and evidence from the fixed-seed blind review."
+                ),
+            },
+            {
+                "stage": "r10_calibration_split",
+                "decision": (
+                    "Cushing is frozen as the Gold validation holdout. Bowen, Algebra, and "
+                    "Mallory are the only bounded calibration-training sources. Psychology, "
+                    "Federalist, and Channing remain machine-excluded."
                 ),
             },
         ],

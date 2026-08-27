@@ -6,6 +6,7 @@ from pathlib import Path
 
 import pytest
 
+from scripts import build_principia_qualification as qualification_builder
 from scripts.build_principia_qualification import (
     EXPECTED_AUDIT_SHA256,
     EXPECTED_CANDIDATE_SHA256,
@@ -19,8 +20,8 @@ from scripts.build_principia_qualification import (
 ROOT = Path(__file__).resolve().parents[1]
 CANDIDATE_ENV = os.environ.get("PRINCIPIA_QUALIFIED_CANDIDATE")
 CANDIDATE = Path(CANDIDATE_ENV) if CANDIDATE_ENV else None
-AUDIT = ROOT / "experiments/audits/principia-34-candidate-quality-20260826-r8.json"
-QUALIFICATION = ROOT / "experiments/audits/principia-34-qualification-20260826.json"
+AUDIT = ROOT / "experiments/audits/principia-34-candidate-quality-20260826-r10.json"
+QUALIFICATION = ROOT / "experiments/audits/principia-34-qualification-20260826-r10.json"
 
 
 @pytest.fixture(scope="module")
@@ -54,9 +55,9 @@ def test_artifact_and_audit_hash_contract(qualification, audit):
     assert qualification["artifacts"]["candidate"]["sha256"] == EXPECTED_CANDIDATE_SHA256
     assert (
         qualification["artifacts"]["candidate"]["file_name"]
-        == "principia-34-candidate-20260826-r8.parquet"
+        == "principia-34-candidate-20260826-r10.parquet"
     )
-    assert qualification["artifacts"]["candidate"]["size_bytes"] == 23_111_880
+    assert qualification["artifacts"]["candidate"]["size_bytes"] == 23_107_588
     assert qualification["artifacts"]["candidate"]["row_count"] == 34
     assert qualification["artifacts"]["quality_audit"]["sha256"] == EXPECTED_AUDIT_SHA256
     assert qualification["artifacts"]["raw_source"] == audit["inputs"]["raw"]
@@ -68,7 +69,7 @@ def test_artifact_and_audit_hash_contract(qualification, audit):
         "sample_windows": 64,
     }
     assert qualification["artifacts"]["candidate"] == audit["inputs"]["processed"] | {
-        "file_name": "principia-34-candidate-20260826-r8.parquet"
+        "file_name": "principia-34-candidate-20260826-r10.parquet"
     }
     if CANDIDATE is not None and CANDIDATE.exists():
         assert sha256_file(CANDIDATE) == EXPECTED_CANDIDATE_SHA256
@@ -124,8 +125,8 @@ def test_tier_role_and_token_sums_are_self_consistent(qualification):
         tier_tokens[book["manual_qualification"]["tier"]] += book["qwen_token_count"]
         role_tokens[book["manual_qualification"]["role"]] += book["qwen_token_count"]
 
-    assert summary["qwen_token_count"] == 10_075_919
-    assert summary["tier_book_counts"] == {"GOLD": 1, "HOLD": 19, "REVIEW": 14}
+    assert summary["qwen_token_count"] == 10_075_842
+    assert summary["tier_book_counts"] == {"GOLD": 1, "HOLD": 22, "REVIEW": 11}
     assert summary["tier_book_counts"] == dict(sorted(tier_books.items()))
     assert summary["tier_token_counts"] == dict(sorted(tier_tokens.items()))
     assert summary["role_book_counts"] == dict(sorted(role_books.items()))
@@ -149,16 +150,16 @@ def test_manual_primary_exclusive_ledger_is_complete(qualification):
 
     assert qualification["summary"]["manual_category_totals"] == dict(category_totals)
     assert (
-        qualification["summary"]["manual_primary_exclusive_finding_count"] == finding_total == 402
+        qualification["summary"]["manual_primary_exclusive_finding_count"] == finding_total == 394
     )
 
 
-def test_gold_gate_is_zero_finding_native_context_anchor(qualification):
+def test_gold_gate_is_zero_finding_validation_holdout(qualification):
     books = {book["barcode"]: book for book in qualification["books"]}
     gold = books["HN6KER"]
 
     assert gold["manual_qualification"]["tier"] == "GOLD"
-    assert gold["manual_qualification"]["role"] == "gold_native_context_anchor"
+    assert gold["manual_qualification"]["role"] == "gold_validation_holdout"
     assert gold["manual_qualification"]["finding_count"] == 0
     assert sum(gold["automatic_metrics"]["hard_error_counts"].values()) == 0
     assert gold["qwen_token_count"] == qualification["gold_gate"]["qwen_token_count"] == 52_500
@@ -174,6 +175,29 @@ def test_gold_gate_is_zero_finding_native_context_anchor(qualification):
         "sections": 31,
         "footnote_blocks": 25,
     }
+
+
+def test_calibration_split_is_machine_enforced(qualification):
+    books = {book["barcode"]: book for book in qualification["books"]}
+    scope = qualification["training_scope"]
+    ready = set(scope["calibration_training_ready_barcodes"])
+
+    assert ready == {"32044018740308", "32044097009690", "HC1BZF"}
+    assert (
+        scope["calibration_training_ready_token_count"]
+        == sum(books[barcode]["qwen_token_count"] for barcode in ready)
+        == 761_948
+    )
+    assert scope["gold_validation_holdout_token_count"] == books["HN6KER"]["qwen_token_count"]
+    assert books["AH3KTH"]["manual_qualification"]["role"] == "quarantined_column_reconstruction"
+    assert books["AH3KTH"]["manual_qualification"]["tier"] == "HOLD"
+    assert books["32044010149714"]["manual_qualification"]["tier"] == "HOLD"
+    assert books["32044072043805"]["manual_qualification"]["tier"] == "HOLD"
+    for (
+        barcode,
+        expected_sha256,
+    ) in qualification_builder.EXPECTED_LEGACY_HOLDOUT_TEXT_SHA256.items():
+        assert books[barcode]["text_sha256"] == expected_sha256
 
 
 def test_duplicate_group_excludes_davis_1900(qualification):
@@ -264,3 +288,25 @@ def test_compute_token_counts_disables_special_tokens():
 
     assert counts == {"one": 2, "two": 1}
     assert tokenizer.calls == [("alpha beta", False), ("gamma", False)]
+
+
+def test_tokenizer_snapshot_name_is_location_independent(monkeypatch, tmp_path):
+    class FakeTokenizer:
+        vocab_size = 248_044
+
+    monkeypatch.setattr(
+        qualification_builder,
+        "_artifact",
+        lambda path: {
+            "sha256": qualification_builder.TOKENIZER_FILE_HASHES[path.name],
+            "size_bytes": 1,
+        },
+    )
+
+    first = qualification_builder.tokenizer_metadata(tmp_path / "native", FakeTokenizer(), "5.8.1")
+    second = qualification_builder.tokenizer_metadata(
+        tmp_path / "renamed-copy", FakeTokenizer(), "5.8.1"
+    )
+
+    assert first == second
+    assert first["snapshot_name"] == qualification_builder.TOKENIZER_SNAPSHOT_NAME
