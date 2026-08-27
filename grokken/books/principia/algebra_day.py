@@ -6,8 +6,104 @@ A mathematics textbook, being the first part of a course of mathematics.
 Score: 37.4
 """
 
+import regex as re
+
 from grokken.base import BookProcessor
 from grokken.transforms import encoding, ocr, typography, whitespace
+
+_RUNNING_HEADERS = frozenset(
+    {
+        "ADDITION.",
+        "ALGEBRA",
+        "ALGEBRA.",
+        "APPLICATION TO GEOMETRY.",
+        "ARITHMETICAL PROGRESSION.",
+        "COMMON MEASURE.",
+        "DIVISION.",
+        "EQUATIONS OF CURVES.",
+        "EQUATIONS.",
+        "EVOLUTION.",
+        "FRACTIONS.",
+        "GEOMETRICAL PROBLEMS.",
+        "GEOMETRICAL PROGRESSION.",
+        "INFINITE SERIES.",
+        "INVOLUTION OF BINOMIALS.",
+        "INVOLUTION.",
+        "MATHEMATICAL INFINITY.",
+        "MATHEMATICS.",
+        "MULTIPLICATION.",
+        "NOTATION.",
+        "NOTES.",
+        "POWERS.",
+        "PROPORTION.",
+        "QUADRATIC EQUATIONS.",
+        "RADICAL QUANTITIES.",
+        "RATIO.",
+        "SIMPLE EQUATIONS.",
+        "VARIATION.",
+    }
+)
+_FOLIO_RANGE = range(1, 333)
+_MIN_FOLIO_SEQUENCE = 20
+_CONFIRMED_LINE_WRAP_REPAIRS = (
+    ("equili-\nbrium", "equilibrium"),
+    ("VUL-\nGAR", "VULGAR"),
+    ("BE-\nTWEEN", "BETWEEN"),
+    ("QUO-\nTIENT", "QUOTIENT"),
+    ("TO-\nGETHER", "TOGETHER"),
+    ("DE-\nCREASE", "DECREASE"),
+    ("abscis-.\nsas", "abscissas"),
+    # This edition consistently spells the mathematical term with a
+    # lexical hyphen. Only the physical line break is removed here.
+    ("co-ordi\nnates", "co-ordinates"),
+)
+_CONFIRMED_PROSE_OCR_REPAIRS = (
+    ("it may have two\nor more rools, (Art. 498.)", "it may have two\nor more roots, (Art. 498.)"),
+)
+
+
+def _remove_page_furniture(text: str) -> str:
+    """Remove exact running labels only on a long monotone folio sequence."""
+    lines = text.splitlines()
+    header_indices = [index for index, line in enumerate(lines) if line.strip() in _RUNNING_HEADERS]
+    candidates: list[tuple[int, int, set[int]]] = []
+    for index, line in enumerate(lines):
+        if not re.fullmatch(r"[ \t]*\d{1,4}[ \t]*", line):
+            continue
+        headers = {header for header in header_indices if abs(header - index) <= 4}
+        value = int(line.strip())
+        if headers and value in _FOLIO_RANGE:
+            candidates.append((index, value, headers))
+
+    forward = [1] * len(candidates)
+    for position, (index, value, _) in enumerate(candidates):
+        for prior in range(position - 1, -1, -1):
+            prior_index, prior_value, _ = candidates[prior]
+            if index - prior_index > 700:
+                break
+            if 0 < value - prior_value <= 4:
+                forward[position] = max(forward[position], forward[prior] + 1)
+
+    backward = [1] * len(candidates)
+    for position in range(len(candidates) - 1, -1, -1):
+        index, value, _ = candidates[position]
+        for following in range(position + 1, len(candidates)):
+            following_index, following_value, _ = candidates[following]
+            if following_index - index > 700:
+                break
+            if 0 < following_value - value <= 4:
+                backward[position] = max(backward[position], backward[following] + 1)
+
+    clear: set[int] = set()
+    for position, (index, value, headers) in enumerate(candidates):
+        sequence_length = forward[position] + backward[position] - 1
+        ambiguous = any(
+            other_index != index and other_value == value and abs(other_index - index) <= 700
+            for other_index, other_value, _ in candidates
+        )
+        if sequence_length >= _MIN_FOLIO_SEQUENCE and not ambiguous:
+            clear.update({index, *headers})
+    return "\n".join(line for index, line in enumerate(lines) if index not in clear)
 
 
 class AlgebraDay(BookProcessor):
@@ -39,9 +135,7 @@ class AlgebraDay(BookProcessor):
         typography.normalize_spaces,
         ocr.fix_common_errors,
         ocr.fix_long_s,  # Important for 1847 text
-        ocr.fix_digit_letter_confusion,  # Important for math variables (x, l, 0, o)
-        ocr.remove_ocr_artifacts,
-        whitespace.dehyphenate,
+        whitespace.dehyphenate_attested,
         whitespace.normalize_whitespace,
         whitespace.collapse_blank_lines(max_consecutive=2),
         whitespace.trim,
@@ -49,23 +143,21 @@ class AlgebraDay(BookProcessor):
 
     def post_process(self, text: str) -> str:
         """Book-specific cleanup for Introduction to Algebra."""
-        import regex as re
+        # Discard the scan wrapper and title pages. The first preface is the
+        # beginning of the authored text in this copy.
+        front_marker = "PREFACE.\nTHE following summary"
+        front_pos = text.find(front_marker)
+        if front_pos > 0:
+            text = text[front_pos:]
 
-        # Remove running headers
-        text = re.sub(
-            r"^\s*\d+\s+EQUATIONS\.?\s*$",
-            "",
-            text,
-            flags=re.MULTILINE,
-        )
-        text = re.sub(
-            r"^\s*EQUATIONS\.?\s+\d+\s*$",
-            "",
-            text,
-            flags=re.MULTILINE,
-        )
+        text = _remove_page_furniture(text)
 
-        # Remove standalone page numbers
-        text = re.sub(r"^\s*\d{1,4}\s*$", "", text, flags=re.MULTILINE)
+        # This was the sole remaining word split across a page boundary after
+        # the page furniture had been removed.
+        text = text.replace("suc-\n\nceeding", "succeeding")
+        for broken, repaired in _CONFIRMED_LINE_WRAP_REPAIRS:
+            text = text.replace(broken, repaired)
+        for broken, repaired in _CONFIRMED_PROSE_OCR_REPAIRS:
+            text = text.replace(broken, repaired)
 
-        return text
+        return whitespace.collapse_blank_lines(max_consecutive=2)(text).strip()

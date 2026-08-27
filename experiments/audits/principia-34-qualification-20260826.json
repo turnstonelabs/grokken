@@ -1,0 +1,2279 @@
+{
+  "artifacts": {
+    "baseline_candidate": {
+      "row_count": 34,
+      "sha256": "08d097cd91f23d901097ffb82f8267797d90463c2ca70329ecce4642cbb22ba7",
+      "size_bytes": 23132277
+    },
+    "candidate": {
+      "file_name": "principia-34-candidate-20260826-r8.parquet",
+      "row_count": 34,
+      "sha256": "07f9c9a2b29b155077bc8e294fc9ed558c2a3457ce0c08f915174150928e3a87",
+      "size_bytes": 23111880
+    },
+    "quality_audit": {
+      "file_name": "principia-34-candidate-quality-20260826-r8.json",
+      "schema_version": "principia-quality-audit-v2",
+      "sha256": "4343034d4c2f20b616ab5d3148d4a338a2c0318f55fb00802b1418431c4bd928",
+      "size_bytes": 1376554
+    },
+    "raw_source": {
+      "row_count": 34,
+      "sha256": "af6f864dbacf5151f8735e12ae5f32aedaa81f1c7a126efaeb8539fc65ab4c9f",
+      "size_bytes": 23768690
+    }
+  },
+  "automatic_metric_source": {
+    "audit_schema_version": "principia-quality-audit-v2",
+    "audit_sha256": "4343034d4c2f20b616ab5d3148d4a338a2c0318f55fb00802b1418431c4bd928",
+    "hard_error_metrics": [
+      "private_use_character",
+      "replacement_character",
+      "soft_hyphen",
+      "unassigned_or_surrogate_character",
+      "unexpected_control_character"
+    ],
+    "review_heuristic_metrics": [
+      "consecutive_duplicate_line",
+      "global_recurrent_line",
+      "isolated_page_number",
+      "line_end_hyphenation",
+      "line_over_1000_characters",
+      "line_over_300_characters",
+      "pathological_punctuation",
+      "pathological_whitespace",
+      "repeated_header_footer",
+      "suspicious_ocr_glyph",
+      "very_short_line"
+    ]
+  },
+  "books": [
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9528185499642682,
+          "characters": 0.9458648546180991,
+          "non_whitespace_characters": 0.9474168126094571,
+          "nonempty_lines": 0.1787315212207916,
+          "physical_lines": 0.19073089196170795
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 16,
+          "global_recurrent_line": 0,
+          "isolated_page_number": 133,
+          "line_end_hyphenation": 333,
+          "line_over_1000_characters": 215,
+          "line_over_300_characters": 1912,
+          "pathological_punctuation": 30,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 27,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 434
+        }
+      },
+      "barcode": "32044010149714",
+      "baseline_text_sha256": "df1b987c0ab012c6ecf78d956b14a851136bdc0c52bb499c16e7fa511fd444f8",
+      "manual_qualification": {
+        "batch": "validation",
+        "classification": "primary_exclusive",
+        "finding_count": 37,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 13,
+          "ocr_glyph_or_punctuation": 9,
+          "split_word": 14
+        },
+        "reason": "Correct bounded repairs, with dense residual split, OCR, and layout findings.",
+        "role": "holdout_repair",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 350666,
+      "raw_text_sha256": "e04e23a0b65411281bd40714259c44e00410c8661e3e256a2bcbeef7fc870c23",
+      "source_counts": {
+        "processed_characters": 1621638,
+        "processed_nonempty_lines": 5622,
+        "processed_physical_lines": 6276,
+        "raw_characters": 1714450,
+        "reduction_percent": 5.41,
+        "transforms_applied": 11
+      },
+      "text_sha256": "2a5589e2e0e5f62f8082474de74c23f9ba7a95032a3d1d911f73c56c52afebb8",
+      "title": "The Principles of Psychology"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9814446759242457,
+          "characters": 0.975054577374472,
+          "non_whitespace_characters": 0.9776500975905423,
+          "nonempty_lines": 0.7971808078069937,
+          "physical_lines": 0.778175313059034
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 2,
+          "global_recurrent_line": 34,
+          "isolated_page_number": 62,
+          "line_end_hyphenation": 394,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 32,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 66,
+          "suspicious_ocr_glyph": 1,
+          "very_short_line": 191
+        }
+      },
+      "barcode": "32044018647321",
+      "baseline_text_sha256": "7b40337ac7101c149a86ddf068c6dbf58a95ce663daf04739aca750b80168534",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 16,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 9,
+          "ocr_glyph_or_punctuation": 1,
+          "split_word": 5
+        },
+        "reason": "Pervasive marginal and column interleaving.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 207403,
+      "raw_text_sha256": "4667e25acf2d6b70aa18e183bf8b16056df09574286c629de90e1dffc9b6e503",
+      "source_counts": {
+        "processed_characters": 855313,
+        "processed_nonempty_lines": 14704,
+        "processed_physical_lines": 15225,
+        "raw_characters": 877195,
+        "reduction_percent": 2.49,
+        "transforms_applied": 10
+      },
+      "text_sha256": "8e03eb16a9aa681234c549e7bebee172804efb529ed77004985ced4abeb9f9f1",
+      "title": "The Vicarious Sacrifice, grounded in principles of universal obligation"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9887650576085532,
+          "characters": 0.9827928586624187,
+          "non_whitespace_characters": 0.9853438120516992,
+          "nonempty_lines": 0.8048722235490805,
+          "physical_lines": 0.7899341880016738
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 130,
+          "global_recurrent_line": 25,
+          "isolated_page_number": 706,
+          "line_end_hyphenation": 237,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 1,
+          "pathological_punctuation": 7,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 79,
+          "suspicious_ocr_glyph": 6,
+          "very_short_line": 1188
+        }
+      },
+      "barcode": "32044018740308",
+      "baseline_text_sha256": "03f79295873687be674988ea3bea5efc720aee8192491f0a1ff5fa355fdb22c3",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 1,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 0,
+          "split_word": 1
+        },
+        "reason": "One residual word continuation.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 307543,
+      "raw_text_sha256": "b80e24c1f4a71697d847bab8fea66781df482451e81161e5d65d34118ae9c8f7",
+      "source_counts": {
+        "processed_characters": 1353578,
+        "processed_nonempty_lines": 20220,
+        "processed_physical_lines": 20765,
+        "raw_characters": 1377277,
+        "reduction_percent": 1.72,
+        "transforms_applied": 10
+      },
+      "text_sha256": "139b8a9d6407a1f128ec0feba1481b3d8556163894f2b411402349e84a6c31a1",
+      "title": "The Principles of Political Economy applied to the American people"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9886819503900872,
+          "characters": 0.9854190286883292,
+          "non_whitespace_characters": 0.9869340684459772,
+          "nonempty_lines": 0.8825335272257231,
+          "physical_lines": 0.8634321653189577
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 35,
+          "global_recurrent_line": 146,
+          "isolated_page_number": 234,
+          "line_end_hyphenation": 331,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 1069,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 181,
+          "suspicious_ocr_glyph": 1,
+          "very_short_line": 551
+        }
+      },
+      "barcode": "32044020258091",
+      "baseline_text_sha256": "bdc1425aa91d3ed4db046102f69b640b770a1e86feae1201338cdd1300dca947",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 9,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 5,
+          "split_word": 3
+        },
+        "reason": "Residual folio, word continuations, and OCR artifacts.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 477732,
+      "raw_text_sha256": "1cf0cf71adb0efa3423ee7a97bed6d25e0822c2b2e91ee6e8d38071a436c4e71",
+      "source_counts": {
+        "processed_characters": 1901705,
+        "processed_nonempty_lines": 32772,
+        "processed_physical_lines": 33635,
+        "raw_characters": 1929844,
+        "reduction_percent": 1.46,
+        "transforms_applied": 10
+      },
+      "text_sha256": "a0bc280ac508fdfb1d047d50c9aef3f4002bb08091389bb2282bef01f0e1120f",
+      "title": "The Principles of Sociology"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9875430935417145,
+          "characters": 0.9832074023849061,
+          "non_whitespace_characters": 0.9857305289893238,
+          "nonempty_lines": 0.8687523845860359,
+          "physical_lines": 0.8243587565823
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 22,
+          "global_recurrent_line": 73,
+          "isolated_page_number": 266,
+          "line_end_hyphenation": 107,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 139,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 407
+        }
+      },
+      "barcode": "32044038386975",
+      "baseline_text_sha256": "1faba546fd0752ad82b03ab89776314b704ff41e376b81b2cd1624137c168b5b",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 15,
+        "finding_counts": {
+          "header_or_folio": 6,
+          "layout_or_other": 1,
+          "ocr_glyph_or_punctuation": 3,
+          "split_word": 5
+        },
+        "reason": "Recurrent page furniture plus cropped and figure OCR.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 58564,
+      "raw_text_sha256": "a4558bd3a700de4e1808232c6dd1aa3a1cf02ed53ebfe734a58f9846e5782640",
+      "source_counts": {
+        "processed_characters": 242163,
+        "processed_nonempty_lines": 4554,
+        "processed_physical_lines": 4853,
+        "raw_characters": 246299,
+        "reduction_percent": 1.68,
+        "transforms_applied": 11
+      },
+      "text_sha256": "17d5fe95881d392a7bba43052be3ff70d04656a6b0b0a68e6745648050f7d1b9",
+      "title": "Church Building: a study of the principles of architecture"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9867738080647138,
+          "characters": 0.982297727859858,
+          "non_whitespace_characters": 0.9845744759647433,
+          "nonempty_lines": 0.8334118280293346,
+          "physical_lines": 0.8160582078121011
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 0,
+          "global_recurrent_line": 4,
+          "isolated_page_number": 89,
+          "line_end_hyphenation": 185,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 1,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 10,
+          "suspicious_ocr_glyph": 10,
+          "very_short_line": 123
+        }
+      },
+      "barcode": "32044069804946",
+      "baseline_text_sha256": "96c201f135041b7c1ac65b1030fe371384d082f7d121d2236ab669dc2032d344",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 8,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 4,
+          "ocr_glyph_or_punctuation": 2,
+          "split_word": 2
+        },
+        "reason": "Footnote and reading-order interruptions, word wraps, and OCR artifacts.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 179476,
+      "raw_text_sha256": "ea12effbbb874b777cdf5e65c32d29cadc189b8950b01a699c202332596ec676",
+      "source_counts": {
+        "processed_characters": 798500,
+        "processed_nonempty_lines": 12387,
+        "processed_physical_lines": 12786,
+        "raw_characters": 812890,
+        "reduction_percent": 1.77,
+        "transforms_applied": 11
+      },
+      "text_sha256": "23d95d23c8112d224effe8ba786a71f37e46fa715f0ff068982fd0a1f531ec8c",
+      "title": "Studies in Logical Theory"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9825036329519322,
+          "characters": 0.9736603375083029,
+          "non_whitespace_characters": 0.9761234777616226,
+          "nonempty_lines": 0.23270195887971507,
+          "physical_lines": 0.26353456519727303
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 196,
+          "global_recurrent_line": 314,
+          "isolated_page_number": 7,
+          "line_end_hyphenation": 212,
+          "line_over_1000_characters": 113,
+          "line_over_300_characters": 1538,
+          "pathological_punctuation": 11,
+          "pathological_whitespace": 2,
+          "repeated_header_footer": 639,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 354
+        }
+      },
+      "barcode": "32044072043805",
+      "baseline_text_sha256": "c24c0c3fdf56e150b6943b8aaa2209f8c1631be5dfb9958bc4c8ef5754e21618",
+      "manual_qualification": {
+        "batch": "validation",
+        "classification": "primary_exclusive",
+        "finding_count": 27,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 18,
+          "ocr_glyph_or_punctuation": 4,
+          "split_word": 5
+        },
+        "reason": "Verified r8 joins are safe; legacy layout, OCR, and word wraps remain.",
+        "role": "holdout_repair",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 293695,
+      "raw_text_sha256": "4a8e575a12fc7ebc75db44d7eae25944b979c6280a3e5858d650a39840b75fa7",
+      "source_counts": {
+        "processed_characters": 1386689,
+        "processed_nonempty_lines": 7187,
+        "processed_physical_lines": 8543,
+        "raw_characters": 1424202,
+        "reduction_percent": 2.63,
+        "transforms_applied": 12
+      },
+      "text_sha256": "18202b6c7ef7227f20eda40d3b1bf590abf8ac4f20956c47e0b403ebdf1a1df0",
+      "title": "The Federalist: a collection of essays in favor of the new Constitution"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9860654762971374,
+          "characters": 0.9830190724976803,
+          "non_whitespace_characters": 0.9848913132804178,
+          "nonempty_lines": 0.883217786277791,
+          "physical_lines": 0.8611268243013915
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 14,
+          "global_recurrent_line": 11,
+          "isolated_page_number": 148,
+          "line_end_hyphenation": 277,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 9,
+          "pathological_whitespace": 1,
+          "repeated_header_footer": 46,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 458
+        }
+      },
+      "barcode": "32044094451689",
+      "baseline_text_sha256": "b58225f4df3821a83797a5af7ff0538d3298bdb7c6a00322fddc7b4f3623fdfa",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 10,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 1,
+          "ocr_glyph_or_punctuation": 6,
+          "split_word": 3
+        },
+        "reason": "Quote and punctuation OCR, missing-text OCR, and word continuations.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 196899,
+      "raw_text_sha256": "e114156d18baa541e72a46ad0c2c5fcf79d069e76482c244dc3920e166fde114",
+      "source_counts": {
+        "processed_characters": 779715,
+        "processed_nonempty_lines": 14778,
+        "processed_physical_lines": 15223,
+        "raw_characters": 793184,
+        "reduction_percent": 1.7,
+        "transforms_applied": 10
+      },
+      "text_sha256": "659f4d5b0e28425c8cbeee7bfa9acdb89bbc9d7f7664890f9b48032b235f3a5c",
+      "title": "The Writings of Harriet Beecher Stowe"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9897651809935312,
+          "characters": 0.9862754463943877,
+          "non_whitespace_characters": 0.9877376310700521,
+          "nonempty_lines": 0.9135306907509617,
+          "physical_lines": 0.8974358974358975
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 166,
+          "global_recurrent_line": 291,
+          "isolated_page_number": 888,
+          "line_end_hyphenation": 77,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 1,
+          "pathological_punctuation": 80,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 1587,
+          "suspicious_ocr_glyph": 25,
+          "very_short_line": 3228
+        }
+      },
+      "barcode": "32044097009690",
+      "baseline_text_sha256": "ff811a19e6e1d254326f4bc349612149e32714b1e4d07960c26a634f013d6203",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 6,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 0,
+          "split_word": 6
+        },
+        "reason": "Residual word continuations; mathematical formulas were preserved.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 176574,
+      "raw_text_sha256": "12a3a45f86bfe7102c0c3078c4eee3966e617ee394c9cb6278e3274aa76e7c07",
+      "source_counts": {
+        "processed_characters": 540978,
+        "processed_nonempty_lines": 16386,
+        "processed_physical_lines": 16730,
+        "raw_characters": 548506,
+        "reduction_percent": 1.37,
+        "transforms_applied": 12
+      },
+      "text_sha256": "cc6fa4270901acfdcb4b9dcdecac6f49e1ca0309fca94c917741ef7f20f535de",
+      "title": "An Introduction to Algebra"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9945987624044041,
+          "characters": 0.9898082493373594,
+          "non_whitespace_characters": 0.9917390779172738,
+          "nonempty_lines": 0.8641740908427048,
+          "physical_lines": 0.8483177439620271
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 16,
+          "global_recurrent_line": 43,
+          "isolated_page_number": 282,
+          "line_end_hyphenation": 104,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 2,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 213,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 572
+        }
+      },
+      "barcode": "32044097047575",
+      "baseline_text_sha256": "a2bc978fc4ad33c1c1fe78d232736740185846f661d20bfea0fedc27baf47c6b",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 14,
+        "finding_counts": {
+          "header_or_folio": 2,
+          "layout_or_other": 6,
+          "ocr_glyph_or_punctuation": 5,
+          "split_word": 1
+        },
+        "reason": "Figures and questions displace prose, with residual OCR and page heads.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 158379,
+      "raw_text_sha256": "43553743839339a8558f0901618c17e08b2aa2df0dbe62dea896105ade3d1354",
+      "source_counts": {
+        "processed_characters": 643799,
+        "processed_nonempty_lines": 11834,
+        "processed_physical_lines": 12153,
+        "raw_characters": 650428,
+        "reduction_percent": 1.02,
+        "transforms_applied": 12
+      },
+      "text_sha256": "a0883c00e8e99c5a3fa75fb2b2ebf3b76b4f4f2ad6b263f2266ec05ec9ac65a0",
+      "title": "A System of Natural Philosophy"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9841882519929934,
+          "characters": 0.9777788629229159,
+          "non_whitespace_characters": 0.9810604027746099,
+          "nonempty_lines": 0.8075108009305417,
+          "physical_lines": 0.7888518821089675
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 19,
+          "global_recurrent_line": 85,
+          "isolated_page_number": 261,
+          "line_end_hyphenation": 205,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 105,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 490
+        }
+      },
+      "barcode": "32044097049340",
+      "baseline_text_sha256": "d122accccb7bb5ebc6757350d90ebc101fa28772b88428b7866e9fb5fd52e5d8",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 9,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 4,
+          "ocr_glyph_or_punctuation": 0,
+          "split_word": 5
+        },
+        "reason": "Malformed tables and contents plus reordered body text.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 159641,
+      "raw_text_sha256": "ce42a9c75d41048345e7e7e41cbc07200526be6ac0a196245ff9282f9b2ee974",
+      "source_counts": {
+        "processed_characters": 700823,
+        "processed_nonempty_lines": 12149,
+        "processed_physical_lines": 12553,
+        "raw_characters": 716750,
+        "reduction_percent": 2.22,
+        "transforms_applied": 10
+      },
+      "text_sha256": "57483cee8c22ed0aedbec3cf44614678969028470738b064d3236b5fc907a21b",
+      "title": "Elements of Political Science"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.987862909190721,
+          "characters": 0.9812010485887709,
+          "non_whitespace_characters": 0.9842967144255397,
+          "nonempty_lines": 0.8167736734517606,
+          "physical_lines": 0.8052856587640886
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 109,
+          "global_recurrent_line": 251,
+          "isolated_page_number": 747,
+          "line_end_hyphenation": 302,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 317,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 969
+        }
+      },
+      "barcode": "32044103157418",
+      "baseline_text_sha256": "e31a50e22c2051b9f8cf70c4ac2df97f0b8b3df6231ab17d21de6ac82fb6cc89",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 14,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 6,
+          "ocr_glyph_or_punctuation": 2,
+          "split_word": 5
+        },
+        "reason": "Misordered contents, columns, and footnotes; also excluded as a near duplicate.",
+        "role": "duplicate_excluded",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 395269,
+      "raw_text_sha256": "3d19efcdab0e2d1b76c61e0e81e9c2433c2e91797a995b6d1a8107c332ed0f73",
+      "source_counts": {
+        "processed_characters": 1463115,
+        "processed_nonempty_lines": 28369,
+        "processed_physical_lines": 29008,
+        "raw_characters": 1491147,
+        "reduction_percent": 1.88,
+        "transforms_applied": 11
+      },
+      "text_sha256": "c74263edece2f373e78b37356dadcf06728273a4cf0f7d9d8285520de608e583",
+      "title": "The Elements of International Law"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9918110737003367,
+          "characters": 0.9868379036913644,
+          "non_whitespace_characters": 0.9888975832276685,
+          "nonempty_lines": 0.8371619903365263,
+          "physical_lines": 0.8298854297396866
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 27,
+          "global_recurrent_line": 188,
+          "isolated_page_number": 276,
+          "line_end_hyphenation": 356,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 1,
+          "pathological_punctuation": 47,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 273,
+          "suspicious_ocr_glyph": 3,
+          "very_short_line": 628
+        }
+      },
+      "barcode": "32044103157517",
+      "baseline_text_sha256": "1702a34f63e0d3fecdc831213e77785749ff40190d7801d0b7f8cea2549e1c9b",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 16,
+        "finding_counts": {
+          "header_or_folio": 4,
+          "layout_or_other": 10,
+          "ocr_glyph_or_punctuation": 0,
+          "split_word": 2
+        },
+        "reason": "Systematic marginal-heading and two-column interleaving.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 317147,
+      "raw_text_sha256": "8528292254dfb7f6568fc96de19a9b47d6a192693c1e9b6690a9491deefec9bc",
+      "source_counts": {
+        "processed_characters": 1254719,
+        "processed_nonempty_lines": 19752,
+        "processed_physical_lines": 20499,
+        "raw_characters": 1271454,
+        "reduction_percent": 1.32,
+        "transforms_applied": 11
+      },
+      "text_sha256": "4b04bf018f0c293987ecfa6b8fa0ac17f97ac0fff7f747f12ac994c10f9f60ad",
+      "title": "Introduction to the Study of International Law"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9868806856627321,
+          "characters": 0.9825407066510529,
+          "non_whitespace_characters": 0.9843617805808288,
+          "nonempty_lines": 0.8622210910324934,
+          "physical_lines": 0.8402527797776178
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 14,
+          "global_recurrent_line": 34,
+          "isolated_page_number": 62,
+          "line_end_hyphenation": 108,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 6,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 82,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 335
+        }
+      },
+      "barcode": "AH3HJZ",
+      "baseline_text_sha256": "554bbf3cf3857d3092110b1e41e694f69d1b088ef6519115b2ccfff1e9c86db2",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 15,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 3,
+          "ocr_glyph_or_punctuation": 6,
+          "split_word": 5
+        },
+        "reason": "OCR debris and truncated fragments indicate unstable text.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 122587,
+      "raw_text_sha256": "417a2f67e04d8a90f69e508a3729f5f49ac8dfe14ff25bf665191a5017356fd5",
+      "source_counts": {
+        "processed_characters": 526913,
+        "processed_nonempty_lines": 10163,
+        "processed_physical_lines": 10504,
+        "raw_characters": 536276,
+        "reduction_percent": 1.75,
+        "transforms_applied": 12
+      },
+      "text_sha256": "0d8f0db52540effe2109c8891f3d54ecba6325a71473edb3a749d18e3172c130",
+      "title": "Introduction to Ethics: including a critical survey of moral systems"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.993781366080892,
+          "characters": 0.9851460803787315,
+          "non_whitespace_characters": 0.9886157594216571,
+          "nonempty_lines": 0.8229697192112495,
+          "physical_lines": 0.8175152283370304
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 12,
+          "global_recurrent_line": 57,
+          "isolated_page_number": 187,
+          "line_end_hyphenation": 605,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 566,
+          "suspicious_ocr_glyph": 2,
+          "very_short_line": 990
+        }
+      },
+      "barcode": "AH3KTH",
+      "baseline_text_sha256": "a2d29e3f2d5bb912e267316d49acc809f833bd963675fc5d9edc9856e6803ffc",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 3,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 1,
+          "split_word": 2
+        },
+        "reason": "Two word continuations and one isolated prose OCR bar.",
+        "role": "near_1m_repair_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 986686,
+      "raw_text_sha256": "0127c0772d57c004b72221e3872b2dfaa21474b8fe6a7243ade517986539d478",
+      "source_counts": {
+        "processed_characters": 4144812,
+        "processed_nonempty_lines": 91943,
+        "processed_physical_lines": 92873,
+        "raw_characters": 4207307,
+        "reduction_percent": 1.49,
+        "transforms_applied": 11
+      },
+      "text_sha256": "d072877b4c1bebfa5ad724e7058506a9e03f2eefa946f0a27bae48a9c80cf52c",
+      "title": "The Works of William E. Channing, D.D."
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9891438266243865,
+          "characters": 0.9827262326051672,
+          "non_whitespace_characters": 0.9851790401063422,
+          "nonempty_lines": 0.8432576093146871,
+          "physical_lines": 0.8245635159542445
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 4,
+          "global_recurrent_line": 200,
+          "isolated_page_number": 118,
+          "line_end_hyphenation": 178,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 6,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 221,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 312
+        }
+      },
+      "barcode": "AH45Q4",
+      "baseline_text_sha256": "6d6f09584b9eaaf470b681c5995bef9f3f20dbaeb667629eb0884ac5c4df5593",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 8,
+        "finding_counts": {
+          "header_or_folio": 2,
+          "layout_or_other": 2,
+          "ocr_glyph_or_punctuation": 2,
+          "split_word": 2
+        },
+        "reason": "Residual page furniture and interleaved prose.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 173531,
+      "raw_text_sha256": "b12856ccde0a95a150c27793c757908c5f71ed8994f2b7c0e6d24b07456fb7fc",
+      "source_counts": {
+        "processed_characters": 738676,
+        "processed_nonempty_lines": 13326,
+        "processed_physical_lines": 13696,
+        "raw_characters": 751660,
+        "reduction_percent": 1.73,
+        "transforms_applied": 12
+      },
+      "text_sha256": "c256074920a9d44895e02a599a88d8ff71dbd2a52a129bba361170260f32da72",
+      "title": "The Corner-stone, or, A familiar illustration of Christian principles"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9883869419157598,
+          "characters": 0.9846042509574054,
+          "non_whitespace_characters": 0.9866043238095628,
+          "nonempty_lines": 0.8503101249235607,
+          "physical_lines": 0.8284254565934508
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 22,
+          "global_recurrent_line": 104,
+          "isolated_page_number": 283,
+          "line_end_hyphenation": 0,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 295,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 508
+        }
+      },
+      "barcode": "HC1BZF",
+      "baseline_text_sha256": "a681cba2da9271eea4b2237a37ed9f0e2cf96f548dccf508766983ae4c5c932a",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 3,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 1,
+          "split_word": 2
+        },
+        "reason": "Two caption-to-prose ordering seams and one punctuation OCR error.",
+        "role": "provisional_over_262k_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 277885,
+      "raw_text_sha256": "14a076517f915d00a0127e0f60b6e7443bca6882acd6e3528a2c79ff71104a3f",
+      "source_counts": {
+        "processed_characters": 1146933,
+        "processed_nonempty_lines": 19467,
+        "processed_physical_lines": 20593,
+        "raw_characters": 1164867,
+        "reduction_percent": 1.54,
+        "transforms_applied": 11
+      },
+      "text_sha256": "05f4e7b6a427438fce14f227e998e28337bf07401c9c7bcd5d361ee81df9a6b0",
+      "title": "The Principles of Pathologic Histology"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9901557894356137,
+          "characters": 0.9831942702368617,
+          "non_whitespace_characters": 0.9861031945771986,
+          "nonempty_lines": 0.8230710595409503,
+          "physical_lines": 0.8040389527458492
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 0,
+          "global_recurrent_line": 56,
+          "isolated_page_number": 123,
+          "line_end_hyphenation": 137,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 62,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 163
+        }
+      },
+      "barcode": "HN28C4",
+      "baseline_text_sha256": "5a76c5f91a87ecc584dbec7ec384a05f363eb77535adb8fe8968e4741fa78c82",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 15,
+        "finding_counts": {
+          "header_or_folio": 2,
+          "layout_or_other": 3,
+          "ocr_glyph_or_punctuation": 3,
+          "split_word": 7
+        },
+        "reason": "Recurring word continuations and two running heads without broad column damage.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 120277,
+      "raw_text_sha256": "c104d09dc1080d71baf08a5363122de73adbbb0f2030cd5f7e65067f3c73e0b1",
+      "source_counts": {
+        "processed_characters": 540865,
+        "processed_nonempty_lines": 9718,
+        "processed_physical_lines": 10073,
+        "raw_characters": 550110,
+        "reduction_percent": 1.68,
+        "transforms_applied": 11
+      },
+      "text_sha256": "bffdc89c1f03b97314f80cdf4b75f5df434a6992ccb449fdbdfa334b28d8ab52",
+      "title": "Evolution of To-day: a summary of the theory of evolution"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9856021806028026,
+          "characters": 0.980925987007831,
+          "non_whitespace_characters": 0.9830392718404719,
+          "nonempty_lines": 0.838880849011095,
+          "physical_lines": 0.8237482443153779
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 10,
+          "global_recurrent_line": 104,
+          "isolated_page_number": 193,
+          "line_end_hyphenation": 222,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 21,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 593,
+          "suspicious_ocr_glyph": 3,
+          "very_short_line": 859
+        }
+      },
+      "barcode": "HN2WWN",
+      "baseline_text_sha256": "9160fd877d34d9c88cb8fe25b1f698a2b4c4cc524f22abdae6d3557b987f77e0",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 9,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 1,
+          "ocr_glyph_or_punctuation": 3,
+          "split_word": 5
+        },
+        "reason": "Word continuations, localized prose OCR, and figure-layout debris.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 286266,
+      "raw_text_sha256": "c13f77e04b62b20f7eca3c095ac68590e5b2f09b5045575e068b04166965f6b1",
+      "source_counts": {
+        "processed_characters": 1139013,
+        "processed_nonempty_lines": 20868,
+        "processed_physical_lines": 21700,
+        "raw_characters": 1161161,
+        "reduction_percent": 1.91,
+        "transforms_applied": 11
+      },
+      "text_sha256": "b2061c75c26bbef4fe5b53b8824e34292aa65861def5500c813e55b0e0cddb28",
+      "title": "A Text-book of the Principles of Animal Histology"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9766543342855805,
+          "characters": 0.9694201290239399,
+          "non_whitespace_characters": 0.9723660226029894,
+          "nonempty_lines": 0.7726623840114204,
+          "physical_lines": 0.7267267267267268
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 0,
+          "global_recurrent_line": 6,
+          "isolated_page_number": 0,
+          "line_end_hyphenation": 0,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 6,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 5
+        }
+      },
+      "barcode": "HN6KER",
+      "baseline_text_sha256": "85edca2c2de2af612203f18a44fadef0538fae104359e4eeb3fdd519ca45e3f6",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 0,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 0,
+          "split_word": 0
+        },
+        "reason": "Whole-book census found no known material content, OCR, furniture, or order blocker.",
+        "role": "gold_native_context_anchor",
+        "sample_windows": 64,
+        "tier": "GOLD"
+      },
+      "qwen_token_count": 52500,
+      "raw_text_sha256": "aaabec454805a4d53f8283d44aa5a631547be1f887e73a419fbc0d1fcacef4fe",
+      "source_counts": {
+        "processed_characters": 210528,
+        "processed_nonempty_lines": 4330,
+        "processed_physical_lines": 4356,
+        "raw_characters": 217169,
+        "reduction_percent": 3.06,
+        "transforms_applied": 11
+      },
+      "text_sha256": "eda6649cc41101487711ae2b0939b40201a44117df40a9130ea9665692cffcd1",
+      "title": "Manual of Parliamentary Practice: rules of proceeding and debate"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9822787273375928,
+          "characters": 0.9794661016372702,
+          "non_whitespace_characters": 0.9808724102585341,
+          "nonempty_lines": 0.8876755070202809,
+          "physical_lines": 0.8663018560970199
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 39,
+          "global_recurrent_line": 105,
+          "isolated_page_number": 177,
+          "line_end_hyphenation": 119,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 18,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 224,
+          "suspicious_ocr_glyph": 1,
+          "very_short_line": 473
+        }
+      },
+      "barcode": "HNU1G9",
+      "baseline_text_sha256": "9888e7f69f829fba89d4d69b40a6ff6b69e5450f47a3698f30be15cfb1fc5771",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 10,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 5,
+          "split_word": 4
+        },
+        "reason": "Inline running head and folio, word continuations, and numeric-reference OCR.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 150761,
+      "raw_text_sha256": "efd63a05e3926d901253a4a31be2119907ca05c384f440238579dd533a069740",
+      "source_counts": {
+        "processed_characters": 575977,
+        "processed_nonempty_lines": 11380,
+        "processed_physical_lines": 11715,
+        "raw_characters": 588052,
+        "reduction_percent": 2.05,
+        "transforms_applied": 11
+      },
+      "text_sha256": "eab1aba626262591e09e4e46d4235e8a661d2e6e563e001c76364f1c83f1027a",
+      "title": "The Bible as Literature: an introduction"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9887214979344385,
+          "characters": 0.9831790148252321,
+          "non_whitespace_characters": 0.9856748034821688,
+          "nonempty_lines": 0.8160278108132833,
+          "physical_lines": 0.8009416688464557
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 30,
+          "global_recurrent_line": 35,
+          "isolated_page_number": 428,
+          "line_end_hyphenation": 354,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 5,
+          "pathological_punctuation": 1194,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 66,
+          "suspicious_ocr_glyph": 128,
+          "very_short_line": 637
+        }
+      },
+      "barcode": "HNVJ7R",
+      "baseline_text_sha256": "2f75747c1b0dad5747cfc6f3825bd44a88dab947bcc8bfc7f980661c37f8d746",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 19,
+        "finding_counts": {
+          "header_or_folio": 3,
+          "layout_or_other": 5,
+          "ocr_glyph_or_punctuation": 7,
+          "split_word": 4
+        },
+        "reason": "Corrupted Greek plus index and page-number reordering.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 292353,
+      "raw_text_sha256": "e5502e63ef429e5fba10e568942c3b6c3aa5b8495e52c67eb7059eaa6691616f",
+      "source_counts": {
+        "processed_characters": 1162620,
+        "processed_nonempty_lines": 17840,
+        "processed_physical_lines": 18372,
+        "raw_characters": 1182511,
+        "reduction_percent": 1.68,
+        "transforms_applied": 11
+      },
+      "text_sha256": "cbc61e7e56aad1c6df0b885d4720fff3d3ff6a894d080afc078918c4595cce2a",
+      "title": "Hermeneutical Manual: Introduction to the exegetical study of Scripture"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9886245955991555,
+          "characters": 0.9848875146714373,
+          "non_whitespace_characters": 0.9868049305713977,
+          "nonempty_lines": 0.8660857713089617,
+          "physical_lines": 0.8497766195085629
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 17,
+          "global_recurrent_line": 78,
+          "isolated_page_number": 214,
+          "line_end_hyphenation": 363,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 159,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 370
+        }
+      },
+      "barcode": "HWABNK",
+      "baseline_text_sha256": "c6c10b2dbc021bbe7ca076e8fe66b4f099a8d22c6a02054d2711077700c16325",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 13,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 2,
+          "ocr_glyph_or_punctuation": 5,
+          "split_word": 6
+        },
+        "reason": "Word continuations and punctuation OCR with little structural damage.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 246837,
+      "raw_text_sha256": "4736fe1756d92193b2a18f9acf67adbbc6c5faf273a61ad53a69c5a07535c88a",
+      "source_counts": {
+        "processed_characters": 952401,
+        "processed_nonempty_lines": 17792,
+        "processed_physical_lines": 18260,
+        "raw_characters": 967015,
+        "reduction_percent": 1.51,
+        "transforms_applied": 11
+      },
+      "text_sha256": "6e2b7b3e5dcf309ab666fc47788eaf84c92eb9f5e3c830617a09efb6e8af9efc",
+      "title": "The Works of Charles Dickens"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9872902080184709,
+          "characters": 0.9804811252584724,
+          "non_whitespace_characters": 0.983366372395024,
+          "nonempty_lines": 0.8111311719915221,
+          "physical_lines": 0.7952121709299724
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 1,
+          "global_recurrent_line": 3,
+          "isolated_page_number": 60,
+          "line_end_hyphenation": 227,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 14,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 14,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 203
+        }
+      },
+      "barcode": "HWJN82",
+      "baseline_text_sha256": "1805dc3cb0658b70e656cef8441f09a050cd5f5d45b747c0f2bd02a1df6e1783",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 15,
+        "finding_counts": {
+          "header_or_folio": 2,
+          "layout_or_other": 2,
+          "ocr_glyph_or_punctuation": 4,
+          "split_word": 7
+        },
+        "reason": "Mostly mechanical word splits and residual head or signature furniture.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 140217,
+      "raw_text_sha256": "99bdbce5c9c6282eb3ce594c325b00c611a08e9c3f43e869b07f2583b0cb21bf",
+      "source_counts": {
+        "processed_characters": 568531,
+        "processed_nonempty_lines": 10333,
+        "processed_physical_lines": 10663,
+        "raw_characters": 579849,
+        "reduction_percent": 1.95,
+        "transforms_applied": 12
+      },
+      "text_sha256": "504da4d7447be4b4a372f1e0a422377afb46c482a8add1504fe1f24802ade488",
+      "title": "The Doctrines of Friends, or, Principles of the Christian Religion"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9965462799578255,
+          "characters": 0.9961381992984721,
+          "non_whitespace_characters": 0.9963684380860705,
+          "nonempty_lines": 0.9904147245129676,
+          "physical_lines": 0.9806444053895723
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 158,
+          "global_recurrent_line": 227,
+          "isolated_page_number": 711,
+          "line_end_hyphenation": 1057,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 21,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 1655,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 1984
+        }
+      },
+      "barcode": "HWK6N4",
+      "baseline_text_sha256": "d6ef36392992c31bb7b15a02fc4669713adbe4e55ee696730800b2e41047030c",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 16,
+        "finding_counts": {
+          "header_or_folio": 2,
+          "layout_or_other": 5,
+          "ocr_glyph_or_punctuation": 2,
+          "split_word": 7
+        },
+        "reason": "Two-column verse is interleaved with word wraps and page artifacts.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 335129,
+      "raw_text_sha256": "96c7349c2a05253a89c796d40d57b337732ecf49a1cc05c3be9dbcee0c41656a",
+      "source_counts": {
+        "processed_characters": 1172883,
+        "processed_nonempty_lines": 41434,
+        "processed_physical_lines": 41849,
+        "raw_characters": 1177430,
+        "reduction_percent": 0.39,
+        "transforms_applied": 10
+      },
+      "text_sha256": "3e78467b978d9d5faeb48cdad597d5481a4434c626eb486547a9dccd6324ab6a",
+      "title": "The Complete Poetical Works of John Greenleaf Whittier"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9916628467410514,
+          "characters": 0.9915701223630277,
+          "non_whitespace_characters": 0.991710175595662,
+          "nonempty_lines": 0.9819752780189343,
+          "physical_lines": 0.9728257561925628
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 6,
+          "global_recurrent_line": 496,
+          "isolated_page_number": 6383,
+          "line_end_hyphenation": 2665,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 3887,
+          "suspicious_ocr_glyph": 6,
+          "very_short_line": 3713
+        }
+      },
+      "barcode": "HWKBVP",
+      "baseline_text_sha256": "11b8615ee614e864094ffbe1fc988e0cb9806b3a655a72e5e0f2e9217f490739",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 11,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 1,
+          "ocr_glyph_or_punctuation": 3,
+          "split_word": 7
+        },
+        "reason": "Verse and glossary wraps, numeral OCR, and one ordering defect.",
+        "role": "factor_4_repair_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 1150405,
+      "raw_text_sha256": "f32b74f0bb1867490876414641ee452084a36ee90096589f4f20e270c77bcca2",
+      "source_counts": {
+        "processed_characters": 3009806,
+        "processed_nonempty_lines": 95012,
+        "processed_physical_lines": 95907,
+        "raw_characters": 3035394,
+        "reduction_percent": 0.84,
+        "transforms_applied": 11
+      },
+      "text_sha256": "0002638d9cdad1437f5719bd74251fd88eb60c83552564b7d0b2860031d1a27e",
+      "title": "The Student's Chaucer, being a complete edition of his works"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.993534170572721,
+          "characters": 0.988627812147251,
+          "non_whitespace_characters": 0.9904835127285153,
+          "nonempty_lines": 0.8537608440052115,
+          "physical_lines": 0.8415266988055393
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 35,
+          "global_recurrent_line": 86,
+          "isolated_page_number": 305,
+          "line_end_hyphenation": 392,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 3,
+          "pathological_punctuation": 20,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 120,
+          "suspicious_ocr_glyph": 1,
+          "very_short_line": 822
+        }
+      },
+      "barcode": "HWPLDT",
+      "baseline_text_sha256": "22919207f663c4d7d83e8b6996722dd1a5e1b0c8abebe9dd987340a66c7929ea",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 13,
+        "finding_counts": {
+          "header_or_folio": 4,
+          "layout_or_other": 5,
+          "ocr_glyph_or_punctuation": 2,
+          "split_word": 2
+        },
+        "reason": "Severe two-column interleaving and retained page furniture.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 438268,
+      "raw_text_sha256": "8399591fabfd33fc0bbdc13cb3e9ab22723d35510cf73b3dab342694cd1d5107",
+      "source_counts": {
+        "processed_characters": 1807702,
+        "processed_nonempty_lines": 26867,
+        "processed_physical_lines": 27406,
+        "raw_characters": 1828496,
+        "reduction_percent": 1.14,
+        "transforms_applied": 11
+      },
+      "text_sha256": "7a5ee835525b354315b9ab16e933fb03e4e32355e1a1aa254444461d4a276d55",
+      "title": "A Complete Manual of English Literature"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9878557011780978,
+          "characters": 0.9812690340023922,
+          "non_whitespace_characters": 0.9843289000669553,
+          "nonempty_lines": 0.8195789413545862,
+          "physical_lines": 0.808277306293398
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 226,
+          "global_recurrent_line": 251,
+          "isolated_page_number": 699,
+          "line_end_hyphenation": 306,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 22,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 310,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 1197
+        }
+      },
+      "barcode": "HWQTYU",
+      "baseline_text_sha256": "f5d3371a82360475d11dcb9395dc7b5f36fcd2f24d6ac4c6d9352665b7d31c0c",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 10,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 3,
+          "ocr_glyph_or_punctuation": 2,
+          "split_word": 4
+        },
+        "reason": "Corrupt contents layout, orphan furniture, word wraps, and OCR or column seams.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 396386,
+      "raw_text_sha256": "3d279919a195d30dece4b87562d075543ac8279d9dc1264447a6db0a743e339c",
+      "source_counts": {
+        "processed_characters": 1464441,
+        "processed_nonempty_lines": 28691,
+        "processed_physical_lines": 29334,
+        "raw_characters": 1492395,
+        "reduction_percent": 1.87,
+        "transforms_applied": 11
+      },
+      "text_sha256": "0c9f977a4438c035060389e98d5e6a64038e9fcfdf025e2b5750156a93824a08",
+      "title": "The Elements of International Law; with an account of its origin"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.985965104252154,
+          "characters": 0.9814880388685305,
+          "non_whitespace_characters": 0.9835553234964831,
+          "nonempty_lines": 0.8860897221292267,
+          "physical_lines": 0.8659195676363058
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 34,
+          "global_recurrent_line": 40,
+          "isolated_page_number": 276,
+          "line_end_hyphenation": 164,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 76,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 209,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 676
+        }
+      },
+      "barcode": "HWQXIB",
+      "baseline_text_sha256": "90713d72c0448e4400bb37400138a19dbd00c27ec7876690f26324530965cc58",
+      "manual_qualification": {
+        "batch": "C",
+        "classification": "primary_exclusive",
+        "finding_count": 14,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 10,
+          "ocr_glyph_or_punctuation": 2,
+          "split_word": 1
+        },
+        "reason": "Marginal headings repeatedly interrupt prose, with page junk and OCR.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 123079,
+      "raw_text_sha256": "2457291f8ae42877abe0311031a476322240e406c456f87c3acc27a8437207a4",
+      "source_counts": {
+        "processed_characters": 476748,
+        "processed_nonempty_lines": 10587,
+        "processed_physical_lines": 10895,
+        "raw_characters": 485740,
+        "reduction_percent": 1.85,
+        "transforms_applied": 11
+      },
+      "text_sha256": "1d780459a5dfd3437ce621685ed7e25ac041618d376370ab463fca76b85125b7",
+      "title": "An Introduction to the Study of the Middle Ages (375-814)"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9886965437535467,
+          "characters": 0.9847472053318046,
+          "non_whitespace_characters": 0.9861789854405394,
+          "nonempty_lines": 0.8382669724133138,
+          "physical_lines": 0.8224013801798215
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 57,
+          "global_recurrent_line": 91,
+          "isolated_page_number": 218,
+          "line_end_hyphenation": 143,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 3,
+          "pathological_punctuation": 0,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 171,
+          "suspicious_ocr_glyph": 12,
+          "very_short_line": 693
+        }
+      },
+      "barcode": "HWT5II",
+      "baseline_text_sha256": "0a0b71d3b37bc22d56dbc6c197246ba2338f0ed8ad60f724ab0d0e9b37458b6d",
+      "manual_qualification": {
+        "batch": "A",
+        "classification": "primary_exclusive",
+        "finding_count": 6,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 1,
+          "split_word": 4
+        },
+        "reason": "Signature or page split, ordinary word wraps, and omitted-word OCR.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 428507,
+      "raw_text_sha256": "48fd9a408437dd252cadce6c312c8ccb4da2c1f308bea209d2b8c86bd8c31158",
+      "source_counts": {
+        "processed_characters": 1800240,
+        "processed_nonempty_lines": 24127,
+        "processed_physical_lines": 24788,
+        "raw_characters": 1828124,
+        "reduction_percent": 1.53,
+        "transforms_applied": 11
+      },
+      "text_sha256": "f203ce513856aa922f28538bb56369a5dd45bbbf45a2df72bacd198e0c206a04",
+      "title": "The Atonement: discourses and treatises"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9887981218978842,
+          "characters": 0.9821264044275645,
+          "non_whitespace_characters": 0.9848360789336933,
+          "nonempty_lines": 0.8154718439929556,
+          "physical_lines": 0.7983200130484424
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 36,
+          "global_recurrent_line": 50,
+          "isolated_page_number": 219,
+          "line_end_hyphenation": 282,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 4,
+          "pathological_punctuation": 8,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 80,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 498
+        }
+      },
+      "barcode": "HXQ9SJ",
+      "baseline_text_sha256": "e1a46e1988a0d58aba74dd920bd005f3f6596b364f7fc3aca10d7c2e07585b6a",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 4,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 0,
+          "ocr_glyph_or_punctuation": 1,
+          "split_word": 2
+        },
+        "reason": "Residual folio, word continuations, and isolated OCR.",
+        "role": "review_candidate",
+        "sample_windows": 64,
+        "tier": "REVIEW"
+      },
+      "qwen_token_count": 279979,
+      "raw_text_sha256": "8bce984b2f062d5ec489da0a6f2b40e3cf9ec429233c9a561360b41e1d2515d2",
+      "source_counts": {
+        "processed_characters": 1238648,
+        "processed_nonempty_lines": 18985,
+        "processed_physical_lines": 19578,
+        "raw_characters": 1261190,
+        "reduction_percent": 1.79,
+        "transforms_applied": 10
+      },
+      "text_sha256": "c132717d2bb52850a51e8648df02af170ac3e36d786385dadb76a9eae625922f",
+      "title": "Principles of Political Economy, with some of their applications to social philosophy"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9870045814184819,
+          "characters": 0.9802897083529033,
+          "non_whitespace_characters": 0.9829704756085341,
+          "nonempty_lines": 0.8183035328668913,
+          "physical_lines": 0.8016332225368296
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 67,
+          "global_recurrent_line": 23,
+          "isolated_page_number": 337,
+          "line_end_hyphenation": 204,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 2,
+          "pathological_punctuation": 6,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 60,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 651
+        }
+      },
+      "barcode": "LI3QQB",
+      "baseline_text_sha256": "3a47d14d0996718bd0035c64f586a3e6e487e05cb3b1ce0121b9fa046ecb55a5",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 8,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 1,
+          "ocr_glyph_or_punctuation": 5,
+          "split_word": 2
+        },
+        "reason": "OCR-glyph density, word continuations, and one layout defect.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 272200,
+      "raw_text_sha256": "934b40d004181c8b70ba7df6a0803c9238cd6708a5bb4c3ec6820da505829ef9",
+      "source_counts": {
+        "processed_characters": 1208459,
+        "processed_nonempty_lines": 18947,
+        "processed_physical_lines": 19535,
+        "raw_characters": 1232757,
+        "reduction_percent": 1.97,
+        "transforms_applied": 10
+      },
+      "text_sha256": "a657d49987037753466e885bb1d7176aa6114caf726fb88a9b82d5d68a641d5c",
+      "title": "Principles of Political Economy"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9616360271877857,
+          "characters": 0.9552814989355789,
+          "non_whitespace_characters": 0.9592206893901548,
+          "nonempty_lines": 0.7272083303818092,
+          "physical_lines": 0.7146124865446717
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 24,
+          "global_recurrent_line": 108,
+          "isolated_page_number": 174,
+          "line_end_hyphenation": 168,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 451,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 127,
+          "suspicious_ocr_glyph": 0,
+          "very_short_line": 532
+        }
+      },
+      "barcode": "TZ1HCP",
+      "baseline_text_sha256": "b29901c1ed4a297acc5422e8e9bda43d4fc3204f8f6cbf7378c421b13166287d",
+      "manual_qualification": {
+        "batch": "D",
+        "classification": "primary_exclusive",
+        "finding_count": 13,
+        "finding_counts": {
+          "header_or_folio": 0,
+          "layout_or_other": 2,
+          "ocr_glyph_or_punctuation": 8,
+          "split_word": 3
+        },
+        "reason": "Displaced fragments and extraneous-script OCR.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 129522,
+      "raw_text_sha256": "22890f599721b7368005673969f296e9fffa3b8a6fb7f16335f411e3d75ef5fc",
+      "source_counts": {
+        "processed_characters": 596366,
+        "processed_nonempty_lines": 10266,
+        "processed_physical_lines": 10622,
+        "raw_characters": 624283,
+        "reduction_percent": 4.47,
+        "transforms_applied": 10
+      },
+      "text_sha256": "cbdd86c60c05491e2c92e09ccdec7fa9cf13d4f60ff0450bdba3e01bd5de6ff9",
+      "title": "The Elements of Sociology: a text-book for colleges and schools"
+    },
+    {
+      "automatic_metrics": {
+        "hard_error_counts": {
+          "private_use_character": 0,
+          "replacement_character": 0,
+          "soft_hyphen": 0,
+          "unassigned_or_surrogate_character": 0,
+          "unexpected_control_character": 0
+        },
+        "retention_ratios": {
+          "alphanumeric_characters": 0.9878830667148818,
+          "characters": 0.9849104293826122,
+          "non_whitespace_characters": 0.9864761430674726,
+          "nonempty_lines": 0.8688548773741471,
+          "physical_lines": 0.8515418966911635
+        },
+        "review_heuristic_counts": {
+          "consecutive_duplicate_line": 11,
+          "global_recurrent_line": 69,
+          "isolated_page_number": 433,
+          "line_end_hyphenation": 189,
+          "line_over_1000_characters": 0,
+          "line_over_300_characters": 0,
+          "pathological_punctuation": 428,
+          "pathological_whitespace": 0,
+          "repeated_header_footer": 93,
+          "suspicious_ocr_glyph": 9,
+          "very_short_line": 692
+        }
+      },
+      "barcode": "TZ1WHG",
+      "baseline_text_sha256": "3bfcf4a1a3357e01d1828353186167be48936a1790262ee459ddeee02d6942fc",
+      "manual_qualification": {
+        "batch": "B",
+        "classification": "primary_exclusive",
+        "finding_count": 15,
+        "finding_counts": {
+          "header_or_folio": 1,
+          "layout_or_other": 6,
+          "ocr_glyph_or_punctuation": 4,
+          "split_word": 4
+        },
+        "reason": "Footnotes and page rules intrude into body flow.",
+        "role": "hold",
+        "sample_windows": 64,
+        "tier": "HOLD"
+      },
+      "qwen_token_count": 393556,
+      "raw_text_sha256": "c6b4329f55f4c2f603b4fd88d1a6aaaa78ad9d825e2f985ea2051862fab64d5c",
+      "source_counts": {
+        "processed_characters": 1518920,
+        "processed_nonempty_lines": 23559,
+        "processed_physical_lines": 24217,
+        "raw_characters": 1542191,
+        "reduction_percent": 1.51,
+        "transforms_applied": 11
+      },
+      "text_sha256": "69b8a2d0827d00f8cebeffe4f73d387d82c62194e8fa6c2e74e17f4dbce6c80d",
+      "title": "Introduction to the History of Religions"
+    }
+  ],
+  "content_policy": {
+    "contains_excerpts": false,
+    "contains_source_text": false,
+    "data_artifacts_committed": false
+  },
+  "duplicate_group": {
+    "barcodes": [
+      "32044103157418",
+      "HWQTYU"
+    ],
+    "excluded_barcode": "32044103157418",
+    "excluded_role": "duplicate_excluded",
+    "group": "davis_elements_of_international_law_1900_1903",
+    "long_line_overlap_percent": 92.7,
+    "shared_25_word_shingle_count": 216089,
+    "word_25_shingle_overlap_percent": 88.28
+  },
+  "gold_gate": {
+    "barcode": "HN6KER",
+    "limitation": "This approximately 52.5k-token gold seed cannot validate behavior beyond 262,144 tokens or at 1,000,000 tokens.",
+    "manual_primary_exclusive_finding_count": 0,
+    "native_context_ceiling_tokens": 262144,
+    "qwen_token_count": 52500,
+    "scope": "native_context_preservation_anchor_only",
+    "target_context_tokens": 1000000,
+    "whole_book_census": {
+      "chapters": 15,
+      "footnote_blocks": 25,
+      "ordered_numbered_paragraphs": 315,
+      "sections": 31,
+      "source_page_boundaries_reviewed": 194
+    }
+  },
+  "manual_review_protocol": {
+    "categories": [
+      "header_or_folio",
+      "split_word",
+      "ocr_glyph_or_punctuation",
+      "layout_or_other"
+    ],
+    "classification": "primary_exclusive",
+    "sample_seed_sha256": "08d097cd91f23d901097ffb82f8267797d90463c2ca70329ecce4642cbb22ba7",
+    "sample_windows": 64
+  },
+  "model_configs": {
+    "native_qwen_config": {
+      "file_name": "config.json",
+      "sha256": "191e0af232104ed8b65258cf3fb2b842e288008baca7633c11b82a1ac7203aab",
+      "size_bytes": 4312
+    },
+    "static_yarn4_config": {
+      "file_name": "config.json",
+      "sha256": "1473020b606e0a85a13e6c1fdc72427c0e718c71a92ab27d43cf9b1560f9a329",
+      "size_bytes": 3729
+    },
+    "static_yarn4_profile": {
+      "file_name": "static-yarn4-profile.json",
+      "sha256": "61c58513aba12ddfb439736c4a85b2aba387776afffd7f742a247d48938aaa2a",
+      "size_bytes": 246
+    }
+  },
+  "qualification_history": [
+    {
+      "decision": "Broad dehyphenation was intentional high-recall Phase-0 triage, not final gold evidence.",
+      "stage": "phase_0"
+    },
+    {
+      "decision": "Gold status uses preservation and evidence from the fixed-seed blind review.",
+      "stage": "r8_final_qualification"
+    }
+  ],
+  "qualification_id": "principia-34-r8-20260826",
+  "role_definitions": {
+    "duplicate_excluded": "Excluded member of the declared cross-edition duplicate group.",
+    "factor_4_repair_candidate": "Source long enough for factor-4 geometry work, reserved for repair and requalification.",
+    "gold_native_context_anchor": "Gold preservation anchor inside its observed native-length context; not an extension proof.",
+    "hold": "Non-special hold-tier source pending repair or explicit exception.",
+    "holdout_repair": "Reserved validation source requiring repair; excluded from training.",
+    "near_1m_repair_candidate": "Near-million-token source reserved for repair and requalification.",
+    "provisional_over_262k_candidate": "Provisional source long enough to probe beyond 262,144 tokens after targeted repair.",
+    "review_candidate": "Non-special review-tier candidate requiring targeted review or repair."
+  },
+  "schema_version": "principia-34-qualification-v1",
+  "shared_transform_risk": {
+    "fix_digit_letter_confusion": {
+      "book_count": 34,
+      "math_like_candidate_count": 4,
+      "raw_candidate_count": 6,
+      "used_by_book_count": 0
+    },
+    "remove_ocr_artifacts": {
+      "book_count": 34,
+      "isolated_special_character_count": 7679,
+      "isolated_special_linefeed_count": 1508,
+      "punctuation_cluster_character_count": 7145,
+      "repeated_run_character_count": 110,
+      "used_by_book_count": 0,
+      "would_remove_character_count": 14934
+    }
+  },
+  "status": "qualified_with_tiered_repair_gates",
+  "summary": {
+    "book_count": 34,
+    "manual_category_totals": {
+      "header_or_folio": 38,
+      "layout_or_other": 123,
+      "ocr_glyph_or_punctuation": 104,
+      "split_word": 137
+    },
+    "manual_primary_exclusive_finding_count": 402,
+    "qwen_token_count": 10075919,
+    "role_book_counts": {
+      "duplicate_excluded": 1,
+      "factor_4_repair_candidate": 1,
+      "gold_native_context_anchor": 1,
+      "hold": 18,
+      "holdout_repair": 2,
+      "near_1m_repair_candidate": 1,
+      "provisional_over_262k_candidate": 1,
+      "review_candidate": 9
+    },
+    "role_token_counts": {
+      "duplicate_excluded": 395269,
+      "factor_4_repair_candidate": 1150405,
+      "gold_native_context_anchor": 52500,
+      "hold": 4431852,
+      "holdout_repair": 644361,
+      "near_1m_repair_candidate": 986686,
+      "provisional_over_262k_candidate": 277885,
+      "review_candidate": 2136961
+    },
+    "tier_book_counts": {
+      "GOLD": 1,
+      "HOLD": 19,
+      "REVIEW": 14
+    },
+    "tier_token_counts": {
+      "GOLD": 52500,
+      "HOLD": 4827121,
+      "REVIEW": 5196298
+    }
+  },
+  "tier_definitions": {
+    "GOLD": "Zero hard errors; exhaustive residual disposition; no known material layout or source-order blocker; zero actionable fixed-seed windows; deterministic handler parity; and no duplicate leakage.",
+    "HOLD": "A material OCR, layout, ordering, or duplication blocker remains.",
+    "REVIEW": "Preservation-safe enough for bounded manual repair, but known cleanup remains; not automatic permission to train."
+  },
+  "tokenizer": {
+    "add_special_tokens": false,
+    "files": {
+      "chat_template.jinja": {
+        "sha256": "c3cf9e34abf4f9e36c2d72165aa9c132d3e2a725b6c2586aaa3a8af9d7a81041",
+        "size_bytes": 8952
+      },
+      "merges.txt": {
+        "sha256": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+        "size_bytes": 3353259
+      },
+      "tokenizer.json": {
+        "sha256": "0997f410c57a1f4e53b09e4be8f4a172d90edd9564368fb0847030937229b9f3",
+        "size_bytes": 12809320
+      },
+      "tokenizer_config.json": {
+        "sha256": "b11349aafa7cdc6a320767cf7ceb29ed82f7eda5d65e8e0819e76f0ce947bf27",
+        "size_bytes": 17928
+      },
+      "vocab.json": {
+        "sha256": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003",
+        "size_bytes": 6722759
+      }
+    },
+    "files_aggregate_method": "SHA256(relative_name_utf8 + NUL + file_sha256_ascii + NUL)",
+    "files_aggregate_sha256": "b32e98c076c4975eadddcceee64dbdd6e1d323b2ce319022f66ff8948b193608",
+    "loader": "transformers.AutoTokenizer.from_pretrained(local_files_only=True, trust_remote_code=False)",
+    "snapshot_name": "qwen3.8-27b",
+    "token_count_method": "len(tokenizer.encode(text, add_special_tokens=False))",
+    "tokenizer_class": "Qwen2Tokenizer",
+    "transformers_version": "5.8.1",
+    "vocab_size": 248044
+  },
+  "training_scope": {
+    "currently_gold_token_count": 52500,
+    "duplicate_excluded_token_count": 395269,
+    "non_holdout_nonduplicate_requires_tier_specific_repair": true,
+    "non_holdout_nonduplicate_token_count": 9036289,
+    "validation_holdout_token_count": 644361
+  }
+}

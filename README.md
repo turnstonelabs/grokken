@@ -206,6 +206,10 @@ See `grokken/books/principia/psychology_james.py` for a complete example.
 
 The initial collection: 34 foundational works (1825-1914) from the Institutional Books dataset, totaling ~10M tokens.
 
+The table below is the original collection inventory. For the frozen Qwen3.8 token
+counts, quality tiers, artifact hashes, and current training gates, see
+[Principia 34 quality qualification](docs/principia_quality.md).
+
 | # | Title | Author | Date | Tokens |
 |---|-------|--------|------|--------|
 | 1 | The Principles of Psychology | William James | 1890 | 401,766 |
